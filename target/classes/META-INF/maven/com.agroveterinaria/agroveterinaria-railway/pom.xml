@@ -7,18 +7,17 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.7.RELEASE</version>
-		<relativePath/>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-	<!-- ⚠️ Cambia el groupId a un nombre de paquete válido (sin guiones) -->
-	<groupId>com.agroveterinaria</groupId>
+	<!-- ⚠️ El groupId debe coincidir con el paquete base de tu clase principal -->
+	<groupId>com.AgroVeterinaria</groupId>
 	<artifactId>agroveterinaria-railway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>agroveterinaria-railway</name>
 	<description>Agroveterinaria La Herradura - Spring Boot</description>
 
 	<properties>
-		<!-- Corregido el typo (source, no sourde) -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 	</properties>
@@ -42,15 +41,15 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- PostgreSQL -->
+		<!-- PostgreSQL (Railway lo usa) -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- MySQL (comentado, pero si lo necesitas descomenta) -->
-		<!-- 
+		<!-- MySQL (si lo necesitas, descomenta) -->
+		<!--
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -58,7 +57,7 @@
 		</dependency>
 		-->
 
-		<!-- H2 (para pruebas) -->
+		<!-- H2 (para pruebas locales) -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -71,7 +70,7 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
-		<!-- Seguridad (si la usas) -->
+		<!-- Seguridad -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -81,7 +80,7 @@
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 
-		<!-- Webjars (jQuery, Bootstrap) -->
+		<!-- Webjars -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
@@ -98,7 +97,7 @@
 			<version>1.9.1</version>
 		</dependency>
 
-		<!-- Swagger (opcional, pero si lo usas) -->
+		<!-- Swagger (opcional) -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -121,7 +120,7 @@
 			<artifactId>commons-codec</artifactId>
 		</dependency>
 
-		<!-- Actuator (para monitoreo) -->
+		<!-- Actuator -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -140,9 +139,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- ✅ INDICAMOS EXPLÍCITAMENTE LA CLASE PRINCIPAL -->
+				<!-- ✅ Indicamos la clase principal exacta -->
 				<configuration>
-					<mainClass>com.agroveterinaria.AgroveterinariaApplication</mainClass>
+					<mainClass>com.AgroVeterinaria.AgroVeterinaria</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
