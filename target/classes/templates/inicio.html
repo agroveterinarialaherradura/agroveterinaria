@@ -1,0 +1,897 @@
+<!--Desarrollado por: Tu Pagina Web Hoy
+    Created on : 09/07/2026, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 38153640
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="icon" th:href="@{/images/redondo.jpg}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <meta name="description" content="Agroveterinaria La Herradura en Catemaco, Veracruz. Medicina veterinaria, insumos agropecuarios, farmacia y asesoramiento técnico para ganado y cultivos en la región de Los Tuxtlas. ¡Confía en nuestros expertos!">
+  <meta name="keywords" content="agroveterinaria, veterinaria Catemaco, insumos agropecuarios, medicina bovina, ganadería Veracruz, Los Tuxtlas, farmacia veterinaria, asesoría técnica, salud animal, cultivos tropicales">
+  <meta name="author" content="Agroveterinaria La Herradura">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Spanish">
+  <meta name="geo.region" content="MX-VER">
+  <meta name="geo.placename" content="Catemaco, Veracruz">
+  <meta name="geo.position" content="18.4214;-95.1138">
+  
+  
+  <title>Agroveterinaria La Herradura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: #F9F6F1; color: #1A1A1A; font-family: 'Nunito Sans', sans-serif; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; }
+
+    /* ── Tokens ── */
+    :root {
+      --red:   #C41E1E;
+      --green: #3A8B35;
+      --dark:  #1A1A1A;
+      --muted: #6B6B6B;
+      --bg:    #F9F6F1;
+      --card:  #FFFFFF;
+      --alt:   #F0EBE3;
+    }
+
+    /* ── Utilities ── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-label {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: .5rem;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 1.5rem; height: 2px; background: var(--red);
+      flex-shrink: 0;
+    }
+    .section-label span {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--red); font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; line-height: 1.1;
+      color: var(--dark); margin-bottom: 1rem;
+    }
+    .section-title em { font-style: normal; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid rgba(0,0,0,.1);
+      box-shadow: 0 1px 8px rgba(0,0,0,.07);
+    }
+    .navbar__inner {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 4rem;
+    }
+    .navbar__brand {
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .navbar__logo {
+      height: 2.75rem; width: 2.75rem;
+      object-fit: contain; border-radius: .25rem;
+    }
+    .navbar__name { line-height: 1.2; }
+    .navbar__name-main {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem; font-weight: 700;
+      color: var(--red); letter-spacing: .02em;
+    }
+    .navbar__name-sub {
+      font-size: .6rem; text-transform: uppercase;
+      letter-spacing: .18em; color: var(--muted);
+    }
+    .navbar__links { display: flex; align-items: center; gap: 2rem; }
+    .navbar__link {
+      font-size: .85rem; font-weight: 500;
+      color: var(--dark); transition: color .2s;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+    .navbar__link:hover,
+    .navbar__link.active {
+      color: var(--red); font-weight: 700;
+      border-bottom-color: var(--red);
+    }
+    .navbar__cta {
+      display: flex; align-items: center; gap: .4rem;
+      background: var(--red); color: #fff;
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .05em; padding: .5rem 1rem;
+      border-radius: .25rem; transition: opacity .2s;
+    }
+    .navbar__cta:hover { opacity: .88; }
+    .navbar__burger { display: none; color: var(--red); padding: .25rem; }
+    .navbar__mobile { display: none; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: flex-end;
+      padding-bottom: 5rem; overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute; inset: 0;
+      background: #1A0A0A;
+    }
+    .hero__bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; opacity: .3;
+    }
+    .hero__bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, #1A0A0A 30%, rgba(26,10,10,.55) 65%, transparent);
+    }
+    .hero__stripe {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: var(--red); z-index: 1;
+    }
+    .hero__content { position: relative; z-index: 1; width: 100%; }
+    .hero__inner { max-width: 48rem; }
+    .hero__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-weight: 700; color: #fff;
+      line-height: 1.05; margin-bottom: 1.25rem;
+    }
+    .hero__title em { font-style: normal; color: var(--red); }
+    .hero__subtitle {
+      font-size: 1.1rem; line-height: 1.7;
+      color: #C8C8C8; max-width: 34rem;
+      margin-bottom: 2.25rem;
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--red); color: #fff;
+      font-weight: 700; font-size: .85rem;
+      letter-spacing: .05em; padding: .875rem 1.5rem;
+      border-radius: .25rem; transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .88; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid rgba(255,255,255,.35); color: #E0E0E0;
+      font-size: .85rem; padding: .875rem 1.5rem;
+      border-radius: .25rem; transition: background .2s, border-color .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
+    .hero__stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: 34rem;
+    }
+    .hero__stat {
+      background: rgba(26,10,10,.85);
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .hero__stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.85rem; font-weight: 700;
+      color: var(--red);
+    }
+    .hero__stat-label {
+      font-size: .7rem; color: #A0A0A0; margin-top: .2rem;
+    }
+
+    /* ── Services ── */
+    .services { background: var(--bg); padding: 6rem 1.5rem; }
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; margin-top: 4rem;
+    }
+    .service-card {
+      background: var(--card); border: 1px solid rgba(0,0,0,.1);
+      border-radius: .375rem; padding: 1.75rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.09); transform: translateY(-2px); }
+    .service-card__icon { font-size: 2rem; margin-bottom: 1.25rem; }
+    .service-card__bar {
+      width: 2rem; height: 2px; background: var(--red);
+      margin-bottom: 1rem;
+      transition: width .25s;
+    }
+    .service-card:hover .service-card__bar { width: 3rem; }
+    .service-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--dark); margin-bottom: .65rem;
+    }
+    .service-card__desc { font-size: .85rem; line-height: 1.7; color: var(--muted); }
+
+    /* ── Contact Banner ── */
+    .contact-banner { background: var(--red); padding: 3rem 1.5rem; }
+    .contact-banner__inner {
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between; gap: 1.5rem;
+    }
+    .contact-banner__label {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem; text-transform: uppercase;
+      letter-spacing: .2em; color: rgba(255,255,255,.65);
+      margin-bottom: .75rem;
+    }
+    .contact-banner__items { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .contact-banner__item {
+      display: flex; align-items: center; gap: .5rem;
+      color: #fff; font-size: .85rem;
+    }
+    .contact-banner__item svg { opacity: .65; }
+    .contact-banner__hours { color: rgba(255,255,255,.75); font-size: .85rem; }
+
+    /* ── About ── */
+    .about { background: var(--bg); padding: 6rem 1.5rem; }
+    .about__split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin-bottom: 5rem;
+    }
+    .about__text p { font-size: .95rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.25rem; }
+    .about__logo-row {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .about__logo-row img { height: 6rem; width: 6rem; object-fit: contain; }
+    .about__logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--red); margin-bottom: .25rem;
+    }
+    .about__logo-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem; text-transform: uppercase;
+      letter-spacing: .18em; color: var(--muted);
+    }
+    .about__badges { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid var(--green); color: var(--green);
+      background: #EDF7EC; font-size: .8rem; font-weight: 600;
+      padding: .4rem 1rem; border-radius: 9999px;
+    }
+    .about__collage {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr; gap: .75rem; height: 460px;
+    }
+    .about__collage img { width: 100%; height: 100%; object-fit: cover; border-radius: .375rem; }
+    .about__collage img:first-child { grid-row: 1 / 3; }
+    .about__team-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 2.5rem;
+    }
+    .about__team { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .team-card__img-wrap {
+      aspect-ratio: 4/5; overflow: hidden;
+      border-radius: .375rem; margin-bottom: 1.25rem;
+      background: #EDE8E0;
+    }
+    .team-card__img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; transition: transform .5s;
+    }
+    .team-card:hover .team-card__img-wrap img { transform: scale(1.05); }
+    .team-card__role {
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem; text-transform: uppercase;
+      letter-spacing: .18em; color: var(--red);
+      margin-bottom: .35rem;
+    }
+    .team-card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--dark); margin-bottom: .5rem;
+    }
+    .team-card__bio { font-size: .82rem; line-height: 1.7; color: var(--muted); }
+
+    /* ── Blog ── */
+    .blog { background: var(--alt); padding: 6rem 1.5rem; }
+    .blog__header {
+      display: flex; flex-wrap: wrap;
+      align-items: flex-end; justify-content: space-between;
+      gap: 1.5rem; margin-bottom: 3rem;
+    }
+    .btn-outline-red {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid var(--red); color: var(--red);
+      font-size: .85rem; padding: .625rem 1.25rem;
+      border-radius: .25rem; transition: background .2s, color .2s;
+    }
+    .btn-outline-red:hover { background: var(--red); color: #fff; }
+    .blog__grid { display: grid; grid-template-columns: 3fr 2fr; gap: 2rem; }
+    .blog-featured {
+      background: var(--card); border: 1px solid rgba(0,0,0,.1);
+      border-radius: .375rem; overflow: hidden; cursor: pointer;
+      transition: box-shadow .3s;
+    }
+    .blog-featured:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+    .blog-featured__img { aspect-ratio: 16/9; overflow: hidden; background: #EDE8E0; }
+    .blog-featured__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .blog-featured:hover .blog-featured__img img { transform: scale(1.05); }
+    .blog-featured__body { padding: 2rem; }
+    .blog-meta { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+    .blog-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem; text-transform: uppercase;
+      letter-spacing: .15em; background: var(--red);
+      color: #fff; padding: .2rem .75rem;
+      border-radius: 9999px; font-weight: 500;
+    }
+    .blog-cat--green { background: transparent; color: var(--red); font-weight: 600; }
+    .blog-date {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem; color: var(--muted);
+      display: flex; align-items: center; gap: .25rem;
+    }
+    .blog-featured__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--dark); line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .blog-featured__excerpt { font-size: .92rem; line-height: 1.75; color: var(--muted); margin-bottom: 1.25rem; }
+    .blog-author { display: flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 600; color: var(--green); }
+    .blog-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+    .blog-card {
+      background: var(--card); border: 1px solid rgba(0,0,0,.1);
+      border-radius: .375rem; overflow: hidden;
+      display: flex; cursor: pointer;
+      transition: box-shadow .25s;
+    }
+    .blog-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+    .blog-card__thumb { width: 8rem; flex-shrink: 0; overflow: hidden; background: #EDE8E0; }
+    .blog-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .blog-card:hover .blog-card__thumb img { transform: scale(1.05); }
+    .blog-card__body { padding: 1.1rem; flex: 1; }
+    .blog-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem; font-weight: 700;
+      color: var(--dark); line-height: 1.35;
+      margin-bottom: .4rem;
+    }
+    .blog-card__excerpt { font-size: .75rem; line-height: 1.65; color: var(--muted);
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    /* Newsletter */
+    .newsletter {
+      background: var(--green); border-radius: .375rem;
+      padding: 1.5rem; color: #fff;
+    }
+    .newsletter h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; margin-bottom: .5rem;
+    }
+    .newsletter p { font-size: .82rem; color: rgba(255,255,255,.75); margin-bottom: 1rem; }
+    .newsletter__form { display: flex; gap: .5rem; }
+    .newsletter__input {
+      flex: 1; background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff; font-size: .85rem; padding: .5rem .75rem;
+      border-radius: .25rem; outline: none;
+      font-family: 'Nunito Sans', sans-serif;
+      transition: border-color .2s;
+    }
+    .newsletter__input::placeholder { color: rgba(255,255,255,.45); }
+    .newsletter__input:focus { border-color: rgba(255,255,255,.7); }
+    .newsletter__btn {
+      background: var(--red); color: #fff;
+      font-size: .75rem; font-weight: 700;
+      padding: .5rem 1rem; border-radius: .25rem;
+      transition: opacity .2s;
+    }
+    .newsletter__btn:hover { opacity: .88; }
+
+    /* ── Footer ── */
+    .footer { background: var(--dark); color: #A0A0A0; padding: 3.5rem 1.5rem; }
+    .footer__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+    .footer__brand { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+    .footer__brand img {
+      height: 3.5rem; width: 3.5rem;
+      object-fit: contain; border-radius: .25rem;
+      background: #fff; padding: .15rem;
+    }
+    .footer__brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem; font-weight: 700; color: #fff;
+    }
+    .footer__brand-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem; text-transform: uppercase;
+      letter-spacing: .15em; color: var(--red);
+    }
+    .footer p { font-size: .85rem; line-height: 1.7; }
+    .footer__heading {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem; text-transform: uppercase;
+      letter-spacing: .18em; color: #fff;
+      margin-bottom: 1rem;
+    }
+    .footer__hours { list-style: none; }
+    .footer__hours li {
+      display: flex; justify-content: space-between;
+      font-size: .85rem; padding: .4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .footer__hours li span:last-child { color: #fff; }
+    .footer__contact { list-style: none; }
+    .footer__contact li {
+      display: flex; align-items: flex-start; gap: .5rem;
+      font-size: .85rem; padding: .45rem 0;
+    }
+    .footer__contact svg { flex-shrink: 0; margin-top: .1rem; color: var(--red); }
+    .footer__bottom {
+      margin-top: 3rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; gap: 1rem;
+    }
+    .footer__bottom span {
+      font-family: 'DM Mono', monospace; font-size: .7rem;
+    }
+    .footer__bottom span:last-child { color: #444; }
+
+    /* ── Icons (inline SVG helpers) ── */
+    .icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .navbar__links { display: none; }
+      .navbar__burger { display: block; }
+      .navbar__mobile.open {
+        display: block; padding: 1rem 1.5rem 1.5rem;
+        border-top: 1px solid rgba(0,0,0,.08);
+      }
+      .navbar__mobile a {
+        display: block; padding: .75rem 0;
+        border-bottom: 1px solid rgba(0,0,0,.05);
+        color: var(--dark); font-size: .9rem;
+      }
+      .navbar__mobile .navbar__cta-mobile {
+        display: flex; justify-content: center;
+        margin-top: .75rem; padding: .75rem;
+        background: var(--red); color: #fff;
+        border-radius: .25rem; font-weight: 700;
+      }
+      .about__split { grid-template-columns: 1fr; }
+      .about__team  { grid-template-columns: 1fr; }
+      .about__collage { height: 300px; }
+      .blog__grid { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero__title { font-size: 2.4rem; }
+      .hero__stats { grid-template-columns: 1fr; max-width: 100%; }
+      .services__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<!-- ══════════════ NAVBAR CORREGIDA ══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="javascript:void(0)" class="navbar__brand" onclick="showSection('inicio')">
+      <!-- Imagen local con Thymeleaf -->
+      <img class="navbar__logo" th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+      <div class="navbar__name">
+        <div class="navbar__name-main">La Herradura</div>
+        <div class="navbar__name-sub">Agroveterinaria</div>
+      </div>
+    </a>
+    <div class="navbar__links">
+      <a class="navbar__link active" href="javascript:void(0)" onclick="showSection('inicio')">Inicio</a>
+      <a class="navbar__link" href="javascript:void(0)" onclick="showSection('quienes')">Quiénes Somos</a>
+      <a class="navbar__link" href="javascript:void(0)" onclick="showSection('blog')">Blog</a>
+      <a class="navbar__cta" href="tel:012949431869">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (01-294) 943-18-69
+      </a>
+    </div>
+    <button class="navbar__burger" onclick="toggleMenu()" aria-label="Menú">
+      <svg id="icon-menu" class="icon" style="width:1.4rem;height:1.4rem" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="icon-close" class="icon" style="width:1.4rem;height:1.4rem;display:none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  
+  <!-- MENÚ MÓVIL CORREGIDO (sin return false) -->
+  <div class="navbar__mobile" id="mobile-menu">
+    <div class="container">
+      <a href="javascript:void(0)" onclick="showSection('inicio');toggleMenu();">Inicio</a>
+      <a href="javascript:void(0)" onclick="showSection('quienes');toggleMenu();">Quiénes Somos</a>
+      <a href="javascript:void(0)" onclick="showSection('blog');toggleMenu();">Blog</a>
+      <a class="navbar__cta-mobile" href="tel:012949431869">Llamar ahora</a>
+    </div>
+  </div>
+</nav>
+
+<main style="padding-top:4rem;">
+
+<!-- ══════════════ INICIO ══════════════ -->
+<div id="section-inicio">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1600&h=900&fit=crop&auto=format" alt="Campo ganadero tropical" />
+    </div>
+    <div class="hero__stripe"></div>
+    <div class="hero__content">
+      <div class="container">
+        <div class="hero__inner">
+          <div class="section-label" style="margin-bottom:1.5rem;">
+            <span>Catemaco, Veracruz · México</span>
+          </div>
+          <h1 class="hero__title">
+            Tu campo y<br>
+            <em>tus animales</em>,<br>
+            en buenas manos.
+          </h1>
+          <p class="hero__subtitle">
+            Medicina veterinaria, insumos agropecuarios y asesoramiento técnico para los productores y familias de la región de Los Tuxtlas.
+          </p>
+			<div class="hero__actions">
+			  <a href="javascript:void(0)" class="btn-primary" onclick="showSection('quienes')">
+			    Conocenos
+			    <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+			  </a>
+			  <a href="javascript:void(0)" class="btn-outline" onclick="showSection('blog')">
+			    Leer artículos
+			    <svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+			  </a>
+			</div>
+          <div class="hero__stats">
+            <div class="hero__stat"><div class="hero__stat-val">+25</div><div class="hero__stat-label">Años de experiencia</div></div>
+            <div class="hero__stat"><div class="hero__stat-val">500+</div><div class="hero__stat-label">Clientes atendidos</div></div>
+            <div class="hero__stat"><div class="hero__stat-val">3</div><div class="hero__stat-label">Especialistas</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="container">
+      <div class="section-label"><span>Nuestros Servicios</span></div>
+      <h2 class="section-title" style="max-width:32rem;margin-bottom:0">
+        Todo lo que necesita tu campo, en un solo lugar.
+      </h2>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__icon">🐄</div>
+          <div class="service-card__bar"></div>
+          <h3 class="service-card__title">Medicina Veterinaria</h3>
+          <p class="service-card__desc">Atención integral para bovinos, équidos y pequeños animales con diagnóstico, cirugía y tratamientos especializados.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🌾</div>
+          <div class="service-card__bar"></div>
+          <h3 class="service-card__title">Insumos Agropecuarios</h3>
+          <p class="service-card__desc">Semillas, fertilizantes, agroquímicos y herramientas seleccionadas para el campo veracruzano.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">💊</div>
+          <div class="service-card__bar"></div>
+          <h3 class="service-card__title">Farmacia Veterinaria</h3>
+          <p class="service-card__desc">Stock permanente de medicamentos, antiparasitarios, vitaminas y suplementos para tu ganado.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🔬</div>
+          <div class="service-card__bar"></div>
+          <h3 class="service-card__title">Asesoramiento Técnico</h3>
+          <p class="service-card__desc">Nuestros especialistas te acompañan con planes sanitarios y productivos diseñados para la región de Los Tuxtlas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Banner -->
+  <div class="contact-banner">
+    <div class="container contact-banner__inner">
+      <div>
+        <p class="contact-banner__label">Encuéntranos</p>
+        <div class="contact-banner__items">
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (01-294) 943-18-69
+          </span>
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cuauhtémoc No. 23, Catemaco, Ver.
+          </span>
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            agroveterinarialaherradura@gmail.com
+          </span>
+        </div>
+      </div>
+      <span class="contact-banner__hours">Lun–Dom: 8:00 – 19:00</span>
+    </div>
+  </div>
+
+</div><!-- /section-inicio -->
+
+
+<!-- ══════════════ QUIÉNES SOMOS ══════════════ -->
+<div id="section-quienes" style="display:none;">
+
+  <section class="about">
+    <div class="container">
+      <div class="section-label"><span>Quiénes Somos</span></div>
+      <div class="about__split">
+        <div class="about__text">
+          <h2 class="section-title">
+            Más de 25 años<br>
+            <em style="color:#3A8B35">al lado del ganadero</em><br>
+            veracruzano.
+          </h2>
+          <p>Agroveterinaria La Herradura nació en Catemaco, Veracruz, como una propuesta familiar para atender las necesidades del campo y los animales en la región de Los Tuxtlas. Con el paso de los años, crecimos en equipo, en servicios y en compromiso.</p>
+          <p>Hoy somos un centro integral de medicina veterinaria e insumos agropecuarios, con la calidez y la cercanía de siempre. Nos especializamos en las condiciones del trópico húmedo y conocemos de cerca los retos que enfrenta el productor de la sierra veracruzana.</p>
+          <div class="about__logo-row">
+            <!-- Imagen local con Thymeleaf -->
+            <img th:src="@{/images/Logotipo.jpg}" alt="Logo Agroveterinaria La Herradura" />
+            <div>
+              <div class="about__logo-name">La Herradura</div>
+              <div class="about__logo-sub">Agroveterinaria · Catemaco, Ver.</div>
+            </div>
+          </div>
+          <div class="about__badges">
+            <span class="badge">🌿 Compromiso ambiental</span>
+            <span class="badge">❤️ Bienestar animal</span>
+            <span class="badge">📖 Actualización continua</span>
+          </div>
+        </div>
+        <div class="about__collage">
+          <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=500&h=600&fit=crop&auto=format" alt="Veterinario en campo" />
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=280&fit=crop&auto=format" alt="Cultivos tropicales" />
+          <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=280&fit=crop&auto=format" alt="Ganado bovino" />
+        </div>
+      </div>
+
+      <!-- Team -->
+      <h3 class="about__team-title">Nuestro equipo</h3>
+      <div class="about__team">
+        <div class="team-card">
+          <div class="team-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=500&fit=crop&auto=format" alt="Dr. Victor C. Pacheco" />
+          </div>
+          <div class="team-card__role">Médico Veterinario — Bovinos y Équidos</div>
+          <div class="team-card__name">Dr. Victor C. Pacheco</div>
+          <p class="team-card__bio">Más de 20 años de experiencia en ganadería tropical. Especialista en sanidad bovina en la región de Los Tuxtlas, Veracruz.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=500&fit=crop&auto=format" alt="Ing. Patricia Ramírez" />
+          </div>
+          <div class="team-card__role">Ingeniera Agrónoma</div>
+          <div class="team-card__name">Ing. Patricia Ramírez</div>
+          <p class="team-card__bio">Especialista en cultivos tropicales, manejo de suelos y nutrición vegetal para las condiciones climáticas de Catemaco.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=500&fit=crop&auto=format" alt="Dra. Ana Lucía Flores" />
+          </div>
+          <div class="team-card__role">Médica Veterinaria — Pequeños Animales</div>
+          <div class="team-card__name">Dra. Ana Lucía Flores</div>
+          <p class="team-card__bio">Apasionada por la clínica de pequeños animales, con formación en cirugía y medicina preventiva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-banner">
+    <div class="container contact-banner__inner">
+      <div>
+        <p class="contact-banner__label">Encuéntranos</p>
+        <div class="contact-banner__items">
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (01-294) 943-18-69
+          </span>
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cuauhtémoc No. 23, Catemaco, Ver.
+          </span>
+        </div>
+      </div>
+      <span class="contact-banner__hours">Lun–Sáb: 8:00 – 19:00</span>
+    </div>
+  </div>
+
+</div><!-- /section-quienes -->
+
+
+<!-- ══════════════ BLOG ══════════════ -->
+<div id="section-blog" style="display:none;">
+
+  <section class="blog">
+    <div class="container">
+      <div class="blog__header">
+        <div>
+          <div class="section-label"><span>Blog & Novedades</span></div>
+          <h2 class="section-title">
+            Consejos, novedades<br>y noticias del campo.
+          </h2>
+        </div>
+        <a href="#" class="btn-outline-red">
+          Todos los artículos
+          <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="blog__grid">
+        <!-- Featured -->
+        <article class="blog-featured">
+          <div class="blog-featured__img">
+            <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&h=450&fit=crop&auto=format" alt="Control de garrapatas en ganado bovino" />
+          </div>
+          <div class="blog-featured__body">
+            <div class="blog-meta">
+              <span class="blog-cat">Sanidad Animal</span>
+              <span class="blog-date">
+                <svg class="icon" style="width:.85em;height:.85em" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                10 Jun 2025
+              </span>
+            </div>
+            <h3 class="blog-featured__title">Control de garrapatas en ganado bovino: estrategias para el trópico veracruzano</h3>
+            <p class="blog-featured__excerpt">El clima húmedo de la región de Los Tuxtlas favorece la proliferación de garrapatas. Te explicamos los esquemas de control más efectivos para proteger tu hato.</p>
+            <div class="blog-author">
+              <svg class="icon" style="width:.9em;height:.9em" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Dr. Victor C. Pacheco
+            </div>
+          </div>
+        </article>
+
+        <!-- Sidebar -->
+        <div class="blog-sidebar">
+          <article class="blog-card">
+            <div class="blog-card__thumb">
+              <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=300&h=200&fit=crop&auto=format" alt="Temporada de lluvias" />
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-meta" style="margin-bottom:.5rem">
+                <span class="blog-cat blog-cat--green">Agronomía</span>
+                <span class="blog-date">25 May 2025</span>
+              </div>
+              <h4 class="blog-card__title">Temporada de lluvias: cómo preparar tus cultivos en Catemaco</h4>
+              <p class="blog-card__excerpt">La época de lluvias en la Sierra de Santa Marta exige un manejo cuidadoso del suelo. Conocé las prácticas recomendadas para maximizar tu cosecha.</p>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <div class="blog-card__thumb">
+              <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&h=200&fit=crop&auto=format" alt="Vacunación mascotas" />
+            </div>
+            <div class="blog-card__body">
+              <div class="blog-meta" style="margin-bottom:.5rem">
+                <span class="blog-cat blog-cat--green">Mascotas</span>
+                <span class="blog-date">8 May 2025</span>
+              </div>
+              <h4 class="blog-card__title">Vacunación anual para perros y gatos: ¿qué vacunas necesitan?</h4>
+              <p class="blog-card__excerpt">El calendario de vacunación es fundamental para la salud de tus mascotas. Te contamos qué vacunas aplican y en qué momento del año.</p>
+            </div>
+          </article>
+
+          <div class="newsletter">
+            <h4>Recibí consejos en tu correo</h4>
+            <p>Novedades de sanidad y agronomía cada mes, sin spam.</p>
+            <div class="newsletter__form">
+              <input class="newsletter__input" type="email" placeholder="tu@correo.com" />
+              <button class="newsletter__btn">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-banner">
+    <div class="container contact-banner__inner">
+      <div>
+        <p class="contact-banner__label">Encuéntranos</p>
+        <div class="contact-banner__items">
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (01-294) 943-18-69
+          </span>
+          <span class="contact-banner__item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cuauhtémoc No. 23, Catemaco, Ver.
+          </span>
+        </div>
+      </div>
+      <span class="contact-banner__hours">Lun–Sáb: 8:00 – 19:00</span>
+    </div>
+  </div>
+
+</div><!-- /section-blog -->
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <!-- Imagen local con Thymeleaf -->
+          <img th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+          <div>
+            <div class="footer__brand-name">Agroveterinaria La Herradura</div>
+            <div class="footer__brand-sub">Catemaco, Veracruz</div>
+          </div>
+        </div>
+        <p>Tu aliado en el campo. Salud animal, insumos agropecuarios y asesoramiento técnico para la región de Los Tuxtlas, Veracruz.</p>
+      </div>
+      <div>
+        <h5 class="footer__heading">Horarios</h5>
+        <ul class="footer__hours">
+          <li><span>Lunes – Viernes</span><span>8:00 – 19:00</span></li>
+          <li><span>Sábados</span><span>8:00 – 13:00</span></li>
+          <li><span>Domingos</span><span>Cerrado</span></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="footer__heading">Contacto</h5>
+        <ul class="footer__contact">
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (01-294) 943-18-69
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@laherradura.com.mx
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cuauhtémoc No. 23, Catemaco, Veracruz, México
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Agroveterinaria La Herradura. Todos los derechos reservados.</span>
+      <span>SAGARPA Registrada · Catemaco, Ver.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showSection(id) {
+    ['inicio','quienes','blog'].forEach(s => {
+      document.getElementById('section-' + s).style.display = s === id ? '' : 'none';
+    });
+    document.querySelectorAll('.navbar__link').forEach((el, i) => {
+      el.classList.toggle('active', ['inicio','quienes','blog'][i] === id);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const open = menu.classList.toggle('open');
+    document.getElementById('icon-menu').style.display  = open ? 'none'  : '';
+    document.getElementById('icon-close').style.display = open ? ''      : 'none';
+  }
+</script>
+
+</body>
+</html>

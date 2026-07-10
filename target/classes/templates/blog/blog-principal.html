@@ -1,0 +1,32 @@
+<!-- En blog/blog-principal.html -->
+<th:block th:fragment="lista-articulos">
+    <div th:each="art : ${articulos}" class="col-md-4">
+        <!-- Ahora apunta directamente a /urlOrigen -->
+        <a class="cardBlog" th:href="@{'/' + ${art.urlBuscar}}" target="_self">
+        	<!-- SELLO DE CONTENIDO HUMANO -->
+            <!-- MEDALLÓN PREMIUN: 100% HUMAN -->
+            <div class="seal-premium">
+                <div class="seal-teeth"></div> <!-- Bordes dentados -->
+                <div class="seal-gold-border">
+                    <div class="seal-inner-red">
+                        <span class="seal-top-text">ORIGINAL</span>
+                        <div class="seal-center-val">100%</div>
+                        <span class="seal-bottom-text">HUMAN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <img class="imgBlog" th:alt="${art.titulo}" th:src="${art.urlCard}" th:title="${art.titulo}" />
+            
+            <div class="cardTitulo" th:text="${art.titulo}">
+                Título del Artículo
+            </div>
+            
+            <div class="cardInfo">
+                <p><b th:text="${art.pregunta}">¿Pregunta?</b></p>
+                <p style="color:yellow;" th:text="${art.comentario}">Comentario resaltado</p>
+                <p style="color:grey;" th:text="${art.respuesta}">Lee.</p>
+            </div>
+        </a>
+    </div>
+</th:block>

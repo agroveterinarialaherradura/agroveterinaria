@@ -1,0 +1,310 @@
+<!-- Página Principal Tu Pagina Web Hoy
+    Created on : 10/11/2018, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 38153640
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+-->
+<html xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+    <script id="usercentrics-cmp" src="https://app.usercentrics.eu/browser-ui/latest/loader.js" data-settings-id="__y3wcTRLqSb_X" async></script>
+        <link rel="icon" href="/images/betha.svg"></link>
+        
+        
+        <title>TuPaginaWebHoy | Desarrollo Web, Consultoría y Tecnología Digital | Blog</title>
+
+		<meta name="description" content="En TuPaginaWebHoy impulsamos tu negocio con tecnologia digital, asesoría web, desarrollo de páginas profesionales y soluciones modernas en México. Lleva tu empresa al siguiente nivel.">
+		<meta name="keywords" content="consultoría digital, desarrollo web, asesoría legal, asesoría tecnológica, páginas web en México, marketing digital, diseño web profesional, soluciones tecnológicas, transformación digital">
+		<meta name="author" content="TuPaginaWebHoy">
+		<meta name="robots" content="index, follow">
+		<meta name="language" content="Spanish">
+		<meta name="geo.region" content="MX">
+		<meta name="geo.placename" content="México">
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="TuPaginaWebHoy | Desarrollo Web, Consultoría y Tecnología Digital">
+		<meta property="og:description" content="Creamos páginas web profesionales y ofrecemos consultoría tecnológica para hacer crecer tu negocio en México.">
+		<meta property="og:url" content="https://tupaginawebhoy.com">
+		<meta property="og:site_name" content="TuPaginaWebHoy">
+		<meta property="og:locale" content="es_MX">
+		<meta property="og:image" content="https://tupaginawebhoy.up.railway.app/images/tupaginawebpreview.png">
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="TuPaginaWebHoy | Desarrollo Web y Tecnología">
+		<meta name="twitter:description" content="Consultoría digital y soluciones tecnológicas para empresas en México.">
+		<meta name="twitter:image" content="https://tupaginawebhoy.up.railway.app/images/tupaginawebpreview.png">
+
+
+
+        <meta name="msvalidate.01" content="63A343C326B78EC40E0D40A3292CA1EC" />
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+        <link rel="stylesheet" type="text/css" href="/css/contacto.css" media="screen"></link>
+        <link rel="stylesheet" type="text/css" href="/css/footer.css" media="screen"></link>
+        <link rel="stylesheet" type="text/css" href="/css/formulario.css" media="screen"></link>
+        <link rel="stylesheet" type="text/css" href="/css/mensaje.css" media="screen"></link>
+        <link rel="stylesheet" type="text/css" href="/css/nav.css" media="screen"></link>
+		<link rel="stylesheet" type="text/css" href="/css/TuPaginaWebHoy.css" media="screen"></link>
+		<link rel="stylesheet" type="text/css" href="/css/articulos.css" media="screen"></link>
+    	
+    	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" ></link>
+		<link href="<c:url value='/css/TuPaginaWebHoy.css'/>" rel="stylesheet">
+
+        <!-- Bootstrap		-->
+        <link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-KMKEGWM6RD">
+		</script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-KMKEGWM6RD');
+		</script>
+    </head>
+
+<body class="cuerpo" id="cuerpo" style="background:linear-gradient(100deg,black,blue 100%); background-size:cover; -moz-background-size:cover; -webkit-background-size:cover; -o-background-size:cover;">
+        <!-- End Google Tag Manager -->
+
+    <nav class="navbar navbar-default" role="navigation" style="background:#0c005b;" >
+      	<div class="container">
+	        <a class="navbar-brand" href="index">
+		      <img alt="logo" src="/images/betha.svg" class="nav-logo" width="auto" height="auto"></img>
+		    </a>
+
+	        <div class="navbar-header" onClick={myFunction}>
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	        </div>
+   	        <div class="navbar-collapse collapse" id="myLinks">
+		        <ul class="nav navbar-nav navbar-right" >
+		           <li><a href="/"      	 	 onClick={myFunction}>INICIO   </a></li>
+		           <li><a href="login"       	 onClick={myFunction}>LOGIN    </a></li>
+		        </ul>
+		    </div>
+	     </div>
+	</nav>
+	    
+		<center>
+		
+
+
+<section id="blog">
+    <div class="text-center">
+        <div class="titulo">Blog</div>
+    <!-- El secreto es 'justify-content-center' -->
+            <div class="search-card">
+                <div class="search-box">
+                    <input type="text" id="busqueda-blog" placeholder="Encuentra respuestas sobre IA, Legal, Productividad...">
+                    <button id="btn-buscar">BUSCAR</button>
+                </div>
+            </div>
+    </div>
+
+
+
+
+
+    <br>
+
+    <div class="container-fluid">
+        <!-- El ID 'grid-articulos' es donde caerán las tarjetas nuevas -->
+        <div id="grid-articulos" class="row">
+            <!-- Carga inicial desde el servidor -->
+            <th:block th:replace="blog/blog-principal :: lista-articulos"></th:block>
+        </div>
+    </div>
+
+    <!-- Botón de carga con estilo similar a tus botones -->
+    <div class="text-center py-5">
+        <button id="load-more-btn" class="btn btn-primary px-5" data-page="1" 
+                style="background-color: #000; border: 1px solid yellow; color: yellow;">
+            Ver más artículos
+        </button>
+    </div>
+</section>
+
+
+	
+        <form class="form-horizontal">
+			<div class="form-group">
+			  <div class="col-md-12">
+				  <center>
+			    	<button id="regresar" 	name="regresar" class="btn btn-danger" ><a href="http://www.tupaginawebhoy.com/" target="_self">Regresar</a></button>
+				  </center>			 
+			  </div>
+			</div>
+		</form>
+		
+		<br></br>
+		<br></br>
+		<br></br>
+		</div>
+		</section>
+
+
+		</center>
+	    <footer class="footer">
+		    <a href="https://wa.me/+525548837137" >
+		       <img alt="Sigueme en WhatsApp" height="30" src="/images/whatsapp.png" title="sigueme en whasapp" width="30" pading="5px" />
+		    </a>
+		    <a href="https://www.facebook.com/SistemasBetha/" >
+		       <img alt="Sigueme en Facebook" height="30" src="/images/face.png" title="sigueme en facebook" width="30" pading="5px" />
+		    </a>
+		    <a href="https://aboutme.google.com/?hl=es-419" >
+		       <img alt="Sigueme en Google+" height="30" src="/images/Google.png" title="sigueme en Google+" width="30" pading="5px" />
+		    </a>
+		    <a href="https://twitter.com/Fernand89270455" >
+		       <img alt="Sigueme en Twitter" height="30" src="/images/Twitter.png" title="sigueme en Twitter" width="30" pading="5px" />
+		    </a>
+		    <a href="https://www.linkedin.com/in/fernando-betancourt-b14b97292/" >
+		       <img alt="Sigueme en Linkedin" height="30" src="/images/linkedin.png" title="sigueme en Linkedin" width="30" pading="5px" />
+		    </a><br></br>
+		    <div th:if="${stats != null}" style="margin-top: 15px; font-family: sans-serif; font-size: 0.9rem; color: #555;">
+		        <span style="background: #f0f0f0; padding: 4px 10px; border-radius: 12px; border: 1px solid #ddd;">
+		            <strong>Eres el Visitante No:</strong> 
+		            <span th:text="${stats.escritorio + stats.movil + stats.tablet + stats.otros}">0</span>
+		        </span>
+		    </div>
+			<div class="container text-center">
+		        <!-- Otros elementos de tu footer -->
+		        <hr style="border-top: 1px solid rgba(255,255,255,0.1);">
+		        <div class="row">
+		            <div class="col-12">
+		                <p class="medical-disclaimer">
+		                    <strong>Descargo de responsabilidad:</strong> La información en este blog no sustituye la asesoría profesional médica, legal o de salud. El uso de este sitio implica la aceptación de nuestros términos.
+		                </p>
+		            </div>
+		        </div>
+		    </div>
+
+		    &#169; Copyright 2018
+		    <br></br>Contacto:<a href="mailto:ferbethasistemas@gmail.com"> tupaginawebhoy.mx@gmail.com </a>.
+	    </footer>
+		<br></br>
+		<br></br>
+		<br></br>
+    </body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- /* https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js */
+    **  CHAT  **   -BEGIN JIVOSITE CODE   El codigo de identificacion es: SOhNu5t6IR  El mío:CZndraalDx-->
+    <!-- Ruta para Administrar el Chat:  https://app.jivosite.com/chat/my/1  -->
+    <script type='text/javascript'>
+    (function(){
+    	//var widget_id = 'CZndraalDx';//La de Fer
+    	//var widget id = 'MA0Ck7E0G6'; //la de tupaginawebhoy
+    	//var widget id = 'J6VFqkG9cJ'; //la de resarcitorias
+      var widget_id = 'MA0Ck7E0G6';
+    	var d=document;
+    	var w=window;
+    	function l(){
+    		var s = document.createElement('script');
+    		s.type = 'text/javascript';
+    		s.async = true;
+    		/* Original: s.src = '//code.jivosite.com/script/widget/'+widget_id; */
+    		s.src = '//code.jivosite.com/script/widget/'+widget_id;
+    		var ss = document.getElementsByTagName('script')[0];
+    		ss.parentNode.insertBefore(s, ss);
+    	}
+    	if(d.readyState=='complete'){l();}
+    	else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    </script>
+    <!-- END JIVOSITE CODE -->
+
+    <script type='text/javascript'>
+ 
+	function myFunction() {
+	  //console.log("Click");
+	  var menus = document.getElementById("myLinks");
+	  if (menus.style.display === "block") {
+	      menus.style.display = "none";
+	  } else {
+	      menus.style.display = "block";
+	  }
+	  //console.log("fin Click");
+	}
+	function myRegistro() {
+		  var correo = document.getElementById("correo");
+		  var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+		  console.log("Inicio Registro:"+correo.value);
+		  if (emailRegex.test(correo.value)) {
+		      	//valido.innerText = "válido";
+				console.log("Correo Valido");
+				try {
+					//var usuario = "${usuario.setemail("+correo.value+")}";  
+					usuario.setemail(correo.value);
+					console.log("TPWH-usuario:"+usuario.toString());
+					console.log("TPWH-NewUsuario:"+usuariosService.newUsuario("${usuario}"));	//th:text="${dia}"
+				}catch(error){
+					console.log("error:"+error);
+				}
+		    } else {
+		    	console.log("Correo No Valido");
+		    }
+		  console.log("Fin Registro");
+		}
+    </script>
+    <!-- END myFunction CODE -->
+    <!-- 5. EL SCRIPT DE CARGA (Asegúrate de que la URL coincida con tu Controller) -->
+    <script>
+
+
+    let busquedaActiva = ""; 
+
+    function solicitarArticulos(esNuevaBusqueda = false) {
+        const btn = document.getElementById('load-more-btn');
+        const contenedor = document.getElementById('grid-articulos');
+        
+        // Si es una búsqueda nueva, reiniciamos todo
+        if (esNuevaBusqueda) {
+            busquedaActiva = document.getElementById('busqueda-blog').value.trim();
+            btn.setAttribute('data-page', '0');
+            contenedor.innerHTML = ""; // Limpiamos para mostrar resultados nuevos
+        }
+
+        const pagina = btn.getAttribute('data-page');
+        // Construimos la URL con el término de búsqueda actual
+        const url = `/blog/api/articulos?page=${pagina}&q=${encodeURIComponent(busquedaActiva)}`;
+
+        fetch(url)
+            .then(res => res.text())
+            .then(html => {
+                if (html.trim() === "") {
+                    if (esNuevaBusqueda) contenedor.innerHTML = "<p class='text-warning text-center'>No se encontraron coincidencias.</p>";
+                    btn.innerHTML = "No hay más artículos";
+                    btn.disabled = true;
+                } else {
+                    // Insertamos el HTML (aquí se conservan imágenes y estilos)
+                    contenedor.insertAdjacentHTML('beforeend', html);
+                    btn.setAttribute('data-page', parseInt(pagina) + 1);
+                    btn.innerHTML = "Ver más artículos";
+                    btn.disabled = false;
+                }
+            })
+            .catch(err => console.error("Error en la petición:", err));
+    }
+
+    document.getElementById('busqueda-blog').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            document.getElementById('btn-buscar').click();
+        }
+    });
+    // Vinculamos ambos botones a la misma lógica
+    document.getElementById('btn-buscar').addEventListener('click', () => solicitarArticulos(true));
+    document.getElementById('load-more-btn').addEventListener('click', () => solicitarArticulos(false));   
+    </script>
+    
+</html>

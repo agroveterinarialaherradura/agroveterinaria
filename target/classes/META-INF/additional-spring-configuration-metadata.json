@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "app.crypto.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'app.crypto.secret-key'"
+  },
+  {
+    "name": "app.crypto.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'app.crypto.secret-key'"
+  },
+  {
+    "name": "app.timezone",
+    "type": "java.lang.String",
+    "description": "A description for 'app.timezone'"
+  }
+]}

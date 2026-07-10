@@ -1,0 +1,112 @@
+/*
+Estilo de la Pagina para 
+Sistemas Betha index.html
+ 
+    Created on : 10/11/2018, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 38153640
+
+    color: yellow;     
+    font-size: 30px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.95);
+*/
+
+/* Esto oculta el icono flotante pero deja que el banner funcione */
+#usercentrics-root {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+
+
+/* Reset básico para el nav */
+.custom-navbar {
+    background: #0c005b;
+    width: 100%;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1000;
+}
+.custom-navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.custom-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.custom-navbar .nav-logo {
+    animation: nav-logo-spin infinite 20s linear;
+    min-height: 1vh;
+    max-height: 5vh;
+    pointer-events: none;
+}
+@keyframes nav-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+/* Botón hamburguesa */
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    margin: 4px 0;
+}
+/* Menú de enlaces */
+.navbar-collapse {
+    flex: 1;
+    text-align: right;
+}
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    gap: 20px;
+}
+.navbar-nav li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 0;
+    display: inline-block;
+    font-weight: 500;
+}
+.navbar-nav li a:hover {
+    text-decoration: underline;
+}
+/* Responsive: en móviles, el menú se colapsa */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        display: none;
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .navbar-collapse.active {
+        display: block;
+    }
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

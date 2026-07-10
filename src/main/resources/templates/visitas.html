@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard de Visitas | TuPaginaWebHoy</title>
+    <link rel="icon" href="/images/betha.svg">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/productos.css">
+    <link rel="stylesheet" type="text/css" href="/css/TuPaginaWebHoy.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        .dashboard-container { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.3); }
+        .stat-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #a0aec0; }
+        .stat-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #fff, #a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        .chart-card { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 1.5rem; padding: 1.2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .chart-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; border-left: 4px solid #a855f7; padding-left: 0.8rem; }
+        .selector-group { margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        select { background: #1e293b; color: white; padding: 0.4rem 0.8rem; border-radius: 2rem; border: 1px solid #a855f7; }
+        .device-table { width: 100%; border-collapse: collapse; color: #cbd5e1; }
+        .device-table th, .device-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .device-table th { background: rgba(168,85,247,0.2); }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: bold; color: white; }
+        .badge-desktop { background: #3b82f6; }
+        .badge-movil { background: #10b981; }
+        .badge-tablet { background: #f59e0b; }
+        .badge-otros { background: #6b7280; }
+        .loading, .error { text-align: center; padding: 2rem; color: #94a3b8; }
+        .error { color: #f87171; background: rgba(248,113,113,0.1); border-radius: 1rem; }
+        @media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav class="custom-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img alt="logo" src="/images/betha.svg" class="nav-logo"></a>
+            <button class="navbar-toggle" id="menuToggle" aria-label="Menú">
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+            <div class="navbar-collapse" id="navCollapse">
+                <ul class="navbar-nav">
+                    <li><a href="/">INICIO</a></li>
+                    <li><a href="/blog">BLOG</a></li>
+                    <li><a href="/visitas" class="active">DASHBOARD</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h1 style="font-size: 2.5rem;">📊 Panel de visitas - Blog</h1>
+        <p style="color: #94a3b8; margin-bottom: 2rem;">Estadísticas de las secciones del Blog</p>
+
+        <div class="chart-row">
+            <!-- Gráfico de barras: visitas por sección (basado en seccionesSelector) -->
+            <div class="chart-card">
+                <div class="chart-title">📊 Visitas por sección</div>
+                <canvas id="sectionsChartCanvas" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Gráfico de dona + selector (desglose por dispositivo vía API) -->
+            <div class="chart-card">
+                <div class="chart-title">📱 Distribución por dispositivo</div>
+                <div class="selector-group">
+                    <label>Sección:</label>
+                    <select id="deviceSectionSelect">
+						<option th:each="sec : ${seccionesSelector}"
+						        th:value="${sec['id']}"
+						        th:text="${sec['nombre']}"
+						        th:selected="${sec['id'] == 'TuPaginaWebHoy'}">
+                        </option>
+                    </select>
+                </div>
+                <canvas id="deviceChartCanvas" width="400" height="300"></canvas>
+                <div id="deviceTableContainer" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <footer class="footer">
+        <a href="https://wa.me/+525548837137"><img src="/images/whatsapp.png" height="30" width="30"></a>
+        <a href="https://www.facebook.com/SistemasBetha/"><img src="/images/face.png" height="30" width="30"></a>
+        <a href="https://twitter.com/Fernand89270455"><img src="/images/Twitter.png" height="30" width="30"></a>
+        <a href="https://www.linkedin.com/in/fernando-betancourt-b14b97292/"><img src="/images/linkedin.png" height="30" width="30"></a>
+        <br>© Copyright 2018 - TuPaginaWebHoy
+    </footer>
+
+    <script th:inline="javascript">
+        // Datos del backend
+        const seccionesStats = /*[[${seccionesStats}]]*/ [];
+        const seccionesSelector = /*[[${seccionesSelector}]]*/ [];
+    </script>
+
+    <script>
+        let deviceChart = null;
+        let sectionsChart = null;
+
+        // Renderizar gráfico de barras usando seccionesSelector como fuente (para mostrar todas, incluso con 0)
+        function renderSectionsBarChart() {
+            if (!seccionesSelector || seccionesSelector.length === 0) {
+                console.warn("No hay secciones definidas en el selector");
+                return;
+            }
+
+            // Mapa de visitas por origen
+            const visitasMap = new Map();
+            if (seccionesStats && seccionesStats.length) {
+                seccionesStats.forEach(stat => {
+                    const origen = stat.origen || stat.nombre;
+                    visitasMap.set(origen, stat.visitas || 0);
+                });
+            }
+
+            // Generar etiquetas y datos basados en seccionesSelector
+            const labels = seccionesSelector.map(sec => sec.nombre);
+            const visitas = seccionesSelector.map(sec => visitasMap.get(sec.id) || 0);
+
+            const ctx = document.getElementById('sectionsChartCanvas').getContext('2d');
+            if (sectionsChart) sectionsChart.destroy();
+            sectionsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Visitas',
+                        data: visitas,
+                        backgroundColor: '#a855f7',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#cbd5e1' } },
+                        x: { ticks: { color: '#cbd5e1', rotation: 45, maxRotation: 45, autoSkip: true } }
+                    }
+                }
+            });
+        }
+
+        // Obtener datos de dispositivos desde la API
+        async function fetchDeviceStats(origen) {
+            const url = `/admin/origen/${encodeURIComponent(origen)}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                console.error(`Error al obtener ${origen}:`, error);
+                return { escritorio: 0, movil: 0, tablet: 0, otros: 0, global: 0 };
+            }
+        }
+
+        // Actualizar gráfico de dona y tabla para la sección seleccionada
+        async function updateDeviceStats(originId) {
+            const stats = await fetchDeviceStats(originId);
+            const ctx = document.getElementById('deviceChartCanvas').getContext('2d');
+            if (deviceChart) deviceChart.destroy();
+            deviceChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Escritorio', 'Móvil', 'Tablet', 'Otros'],
+                    datasets: [{
+                        data: [stats.escritorio, stats.movil, stats.tablet, stats.otros],
+                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#6b7280'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } }
+                }
+            });
+
+            const total = stats.global || 1;
+            const percent = (val) => ((val / total) * 100).toFixed(1);
+            const tableHtml = `
+                <table class="device-table">
+                    <thead><tr><th>Dispositivo</th><th>Visitas</th><th>Porcentaje</th></tr></thead>
+                    <tbody>
+                        <tr><td><span class="badge badge-desktop">Escritorio</span></td><td>${stats.escritorio}</td><td>${percent(stats.escritorio)}%</td></tr>
+                        <tr><td><span class="badge badge-movil">Móvil</span></td><td>${stats.movil}</td><td>${percent(stats.movil)}%</td></tr>
+                        <tr><td><span class="badge badge-tablet">Tablet</span></td><td>${stats.tablet}</td><td>${percent(stats.tablet)}%</td></tr>
+                        <tr><td><span class="badge badge-otros">Otros</span></td><td>${stats.otros}</td><td>${percent(stats.otros)}%</td></tr>
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('deviceTableContainer').innerHTML = tableHtml;
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSectionsBarChart();
+            const selector = document.getElementById('deviceSectionSelect');
+            if (selector && selector.options.length > 0) {
+                const defaultOrigin = selector.value;
+                updateDeviceStats(defaultOrigin);
+                selector.addEventListener('change', (e) => {
+                    updateDeviceStats(e.target.value);
+                });
+            }
+        });
+
+        // Menú hamburguesa (por si acaso)
+        const menuToggle = document.getElementById('menuToggle');
+        const navCollapse = document.getElementById('navCollapse');
+        if (menuToggle && navCollapse) {
+            menuToggle.addEventListener('click', () => navCollapse.classList.toggle('active'));
+            document.querySelectorAll('#navCollapse a').forEach(link => {
+                link.addEventListener('click', () => { if (window.innerWidth <= 768) navCollapse.classList.remove('active'); });
+            });
+        }
+    </script>
+</body>
+</html>

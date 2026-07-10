@@ -1,0 +1,247 @@
+openapi: 3.0.0
+info:
+  title: API de Usuarios
+  description: |
+    API para gestión de usuarios con registro, autenticación y consultas filtradas.
+    Las contraseñas se almacenan cifradas con AES-256 y no se devuelven en las respuestas.
+    La fecha de creación se almacena en zona horaria de Madagascar.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local de desarrollo
+
+paths:
+  /users:
+    get:
+      summary: Lista usuarios con filtro y orden opcionales
+      description: |
+        Devuelve una lista de usuarios. Se puede filtrar mediante el parámetro `filter`
+        con el formato `atributo+operador+valor` y ordenar con `sortedBy`.
+        Los atributos permitidos son: id, email, name, phone, tax_id, created_at.
+        Operadores: eq (igual), co (contiene), sw (empieza con), ew (termina con).
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: '^[a-z_]+(\+[a-z]{2}\+).+$'
+          example: "email+sw+juan"
+          description: Filtro en formato `atributo+operador+valor`. El signo `+` debe codificarse como `%2B` en la URL.
+        - name: sortedBy
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [id, email, name, phone, tax_id, created_at]
+          example: "created_at"
+          description: Campo por el que ordenar (por defecto `id`).
+      responses:
+        '200':
+          description: Lista de usuarios (sin contraseña)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Filtro mal formado o atributo/operador no válido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      summary: Registra un nuevo usuario
+      description: |
+        Crea un usuario con los datos proporcionados.
+        - El `tax_id` debe ser único y tener formato RFC.
+        - El teléfono debe contener exactamente 10 dígitos (se ignoran caracteres no numéricos).
+        - La contraseña se cifra con AES-256 antes de almacenarse.
+        - La fecha de creación se asigna automáticamente con la hora actual de Madagascar.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Datos inválidos (teléfono, RFC) o formato incorrecto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: El tax_id ya está registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /users/{id}:
+    get:
+      summary: Obtiene un usuario por su ID (UUID)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/login:
+    post:
+      summary: Autentica un usuario
+      description: |
+        Inicia sesión con `tax_id` y contraseña.
+        La contraseña se descifra y compara con la proporcionada.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Autenticación exitosa, devuelve los datos del usuario (sin contraseña)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Datos faltantes o inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        addressId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "workaddress"
+        street:
+          type: string
+          example: "street No. 1"
+        countryCode:
+          type: string
+          example: "UK"
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        email:
+          type: string
+          format: email
+          example: "user@mail.com"
+        name:
+          type: string
+          example: "user1"
+        phone:
+          type: string
+          example: "+1 55 555 555 55"
+        taxId:
+          type: string
+          example: "AARR990101XXX"
+        createdAt:
+          type: string
+          format: date-time
+          example: "01-01-2026 00:00"
+          description: Fecha en formato dd-MM-yyyy HH:mm (zona Madagascar)
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+
+    UserRequest:
+      type: object
+      required:
+        - email
+        - name
+        - password
+        - taxId
+      properties:
+        email:
+          type: string
+          format: email
+          example: "user@mail.com"
+        name:
+          type: string
+          example: "user1"
+        phone:
+          type: string
+          example: "+1 55 555 555 55"
+        password:
+          type: string
+          format: password
+          example: "miPassword123"
+          description: Contraseña en texto plano, se cifrará antes de almacenar
+        taxId:
+          type: string
+          example: "AARR990101XXX"
+          description: RFC válido + 4 letras + 6 dígitos + 3 caracteres alfanuméricos
+
+    LoginRequest:
+      type: object
+      required:
+        - taxId
+        - password
+      properties:
+        taxId:
+          type: string
+          example: "AARR990101XXX"
+        password:
+          type: string
+          format: password
+          example: "miPassword123"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Mensaje de error descriptivo"
