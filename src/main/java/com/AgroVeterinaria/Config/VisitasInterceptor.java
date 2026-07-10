@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.AgroVeterinaria.DTO.Visitas;
+import com.AgroVeterinaria.Herramientas.Constantes;
 import com.AgroVeterinaria.Registro.Visitas.DataSourceVisitas;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class VisitasInterceptor implements HandlerInterceptor {
         // 2. Definir origen dinámico
         String origen;
         if (uri.equals("/") || uri.equals("/index")) {
-            origen = "TuPaginaWebHoy";
+            origen = Constantes.ORIGEN_MAY;
         } else {
             // Decodifica la URL para que no guarde "%20" sino espacios reales
             origen = java.net.URLDecoder.decode(uri.substring(1), "UTF-8");
