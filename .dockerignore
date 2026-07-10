@@ -1,0 +1,27 @@
+# Directorios de compilación locales
+target/
+*.log
+*.class
+
+# Directorios de IDE
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+
+# Archivos de configuración locales (si no deben ir a la imagen)
+*.properties.local
+*.yml.local
+application-local.properties
+application-local.yml
+
+# Directorios de versionado
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
