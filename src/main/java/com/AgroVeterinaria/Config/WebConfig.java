@@ -15,6 +15,6 @@ public class WebConfig implements WebMvcConfigurer {
         // Se aplica a todas las rutas excepto a las de recursos estáticos
         registry.addInterceptor(visitasInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/static/**", "/css/**", "/js/**", "/images/**");
+                .excludePathPatterns("/static/**", "/css/**", "/js/**", "/images/**", "/api/**");
     }
 }

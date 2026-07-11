@@ -10,6 +10,7 @@ public class Constantes {
     
     public static final String  ORIGEN          = "agroveterinaria";
     public static final String  ORIGEN_MAY		= "AgroVeterinaria";
+    public static final String  NOMBRE_LARGO	= "AgroVeterinaria La Herradura";
     public static final String  ESQUEMA_REGISTRO= "registro";
     public static final String  ESQUEMA_BLOG	= "blog";
     public static final String  VALIDABLOG		= "validaBlog";

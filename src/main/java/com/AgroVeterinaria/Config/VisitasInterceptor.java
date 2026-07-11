@@ -2,34 +2,32 @@ package com.AgroVeterinaria.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import com.AgroVeterinaria.DTO.Visitas;
 import com.AgroVeterinaria.Herramientas.Constantes;
-import com.AgroVeterinaria.Registro.Visitas.DataSourceVisitas;
-
+import com.AgroVeterinaria.Registro.Visitas.AsyncVisitasService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 @Component
 public class VisitasInterceptor implements HandlerInterceptor {
-
+    
     @Autowired
-    private DataSourceVisitas dataSourceVisitas;
+    private AsyncVisitasService asyncVisitasService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         
         // 1. Evitar recursos estáticos (CSS, JS, Imágenes)
         String uri = request.getRequestURI();
+        System.out.println("🟢 Interceptor ejecutándose para: " + uri);
         if (uri.contains(".") || uri.startsWith("/static")) return true;
 
         // 2. Definir origen dinámico
         String origen;
-        if (uri.equals("/") || uri.equals("/index")) {
+        if (uri.equals("/") || uri.equals("/index") || uri.equals("/inicio")) {
             origen = Constantes.ORIGEN_MAY;
         } else {
-            // Decodifica la URL para que no guarde "%20" sino espacios reales
             origen = java.net.URLDecoder.decode(uri.substring(1), "UTF-8");
         }
 
@@ -44,20 +42,19 @@ public class VisitasInterceptor implements HandlerInterceptor {
             
             LocalDateTime ahora = LocalDateTime.now();
             
-            // Creamos el objeto incluyendo la IP
             Visitas v = new Visitas(
                 ahora.getYear(), ahora.getMonthValue(), ahora.getDayOfMonth(),
                 ahora.getHour(), ahora.getMinute(), ahora.getSecond(),
                 origen, dispositivo, 1L, ipCliente
             );
 
-            // Guardamos en la base de datos de Railway
-            dataSourceVisitas.usuarioUpdateVisitas(v);
+            // ✅ Envío ASÍNCRONO (no bloquea la respuesta)
+            asyncVisitasService.enviarVisita(v);
 
             // Marcamos la sesión con la IP para que no cuente de nuevo en el refresh
             request.getSession().setAttribute(sessionKey, ipCliente);
             
-            System.out.println("Nueva visita registrada [" + origen + "] desde IP: " + ipCliente);
+            System.out.println("Nueva visita registrada [" + origen + "] desde IP: " + ipCliente + " (enviada ASÍNCRONAMENTE)");
         }
 
         return true;
