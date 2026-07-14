@@ -1,4 +1,7 @@
 package com.AgroVeterinaria.Registro.Visitas;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -6,13 +9,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.AgroVeterinaria.DTO.ResumenVisitas;
 import com.AgroVeterinaria.DTO.ResumenVisitasProductos;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class VisitasExternasService {
@@ -54,10 +52,11 @@ public class VisitasExternasService {
             return new ArrayList<>();
         }
     }
-    
+
     public ResumenVisitas procesarVisitas(String origen) {
         try {
             String url = externalApiUrl + "/stats/resumen?origen=" + origen;
+            System.out.println(" procesarVisitas: " + origen);
             ResponseEntity<ResumenVisitas> response = restTemplate.getForEntity(url, ResumenVisitas.class);
             return response.getBody();
         } catch (Exception e) {

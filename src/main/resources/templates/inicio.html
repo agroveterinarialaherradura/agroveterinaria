@@ -138,75 +138,146 @@
     .navbar__mobile { display: none; }
 
     /* ── Hero ── */
-    .hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: flex-end;
-      padding-bottom: 5rem; overflow: hidden;
-    }
-    .hero__bg {
-      position: absolute; inset: 0;
-      background: #1A0A0A;
-    }
-    .hero__bg img {
-      width: 100%; height: 100%;
-      object-fit: cover; opacity: 1;
-    }
-    .hero__bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, #1A3A1A 30%, rgba(30, 80, 30, 0.55) 65%, transparent);
-    }
-    .hero__stripe {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 4px; background: var(--red); z-index: 1;
-    }
-    .hero__content { position: relative; z-index: 1; width: 100%; }
-    .hero__inner { max-width: 48rem; }
-    .hero__title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 8vw, 4.5rem);
-      font-weight: 700; color: #fff;
-      line-height: 1.05; margin-bottom: 1.25rem;
-    }
-    .hero__title em { font-style: normal; color: var(--red); }
-    .hero__subtitle {
-      font-size: 1.1rem; line-height: 1.7;
-      color: #C8C8C8; max-width: 34rem;
-      margin-bottom: 2.25rem;
-    }
-    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--red); color: #fff;
-      font-weight: 700; font-size: .85rem;
-      letter-spacing: .05em; padding: .875rem 1.5rem;
-      border-radius: .25rem; transition: opacity .2s;
-    }
-    .btn-primary:hover { opacity: .88; }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: .5rem;
-      border: 1px solid rgba(255,255,255,.35); color: #E0E0E0;
-      font-size: .85rem; padding: .875rem 1.5rem;
-      border-radius: .25rem; transition: background .2s, border-color .2s;
-    }
-    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
-    .hero__stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      max-width: 34rem;
-    }
-    .hero__stat {
-      background: rgba(26,10,10,.85);
-      padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .hero__stat-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.85rem; font-weight: 700;
-      color: var(--red);
-    }
-    .hero__stat-label {
-      font-size: .7rem; color: #A0A0A0; margin-top: .2rem;
-    }
+/* ── Hero compacto ── */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  overflow: hidden;
+}
+.hero__bg {
+  position: absolute; inset: 0;
+  background: #1A0A0A;
+}
+.hero__bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: 1;
+}
+.hero__bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, #1A3A1A 30%, rgba(30, 80, 30, 0.55) 65%, transparent);
+}
+.hero__logo {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: min(160px, 30vw);
+  max-width: 180px;
+  opacity: 0.95;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+.hero__logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hero__stripe {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px; background: var(--red); z-index: 1;
+}
+.hero__content { position: relative; z-index: 1; width: 100%; }
+.hero__inner {
+  max-width: 48rem;
+  padding-top: 8rem;
+  margin-top: 0;
+}
+.hero__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  font-weight: 700; color: #fff;
+  line-height: 1.05; margin-bottom: 1.25rem;
+}
+.hero__title em { font-style: normal; color: var(--red); }
+.hero__subtitle {
+  font-size: 1.1rem; line-height: 1.7;
+  color: #C8C8C8; max-width: 34rem;
+  margin-bottom: 2.25rem;
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+.hero__stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  max-width: 34rem;
+}
+.hero__stat {
+  background: rgba(26,10,10,.85);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(255,255,255,.08);
+}
+.hero__stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.85rem; font-weight: 700;
+  color: var(--red);
+}
+.hero__stat-label {
+  font-size: .7rem; color: #A0A0A0; margin-top: .2rem;
+}
+
+/* ── Responsive compacto ── */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 70vh;
+    padding-bottom: 1.5rem;
+  }
+  .hero__logo {
+    width: min(130px, 28vw);
+    top: 6%;
+  }
+  .hero__inner {
+    padding-top: 6rem;
+  }
+  .hero__title {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
+  .hero__subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 50vh;
+    padding-bottom: 1rem;
+  }
+  .hero__logo {
+    width: min(90px, 20vw);
+    top: 3%;
+  }
+  .hero__inner {
+    padding-top: 3.5rem;
+  }
+  .hero__title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+  .hero__subtitle {
+    font-size: 0.85rem;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  .hero__actions {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero__stats {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  .hero__stat {
+    padding: 0.75rem 1rem;
+  }
+  .hero__stat-val {
+    font-size: 1.3rem;
+  }
+  .hero__stat-label {
+    font-size: 0.6rem;
+  }
+}
+    /* ... otros ajustes ... */
 
     /* ── Services ── */
     .services { background: var(--bg); padding: 6rem 1.5rem; }
@@ -492,22 +563,24 @@
       .about__collage { height: 300px; }
       .blog__grid { grid-template-columns: 1fr; }
       .footer__grid { grid-template-columns: 1fr; }
+      .hero__logo { width: min(140px, 30vw); top: 4%; }
+      .hero__inner { padding-top: 5rem; }
     }
     @media (max-width: 600px) {
       .hero__title { font-size: 2.4rem; }
       .hero__stats { grid-template-columns: 1fr; max-width: 100%; }
       .services__grid { grid-template-columns: 1fr; }
+      .hero__logo { width: min(120px, 25vw); top: 3%; }
+      .hero__inner { padding-top: 4rem; }
     }
   </style>
 </head>
 <body>
 
 <!-- ══════════════ NAVBAR ══════════════ -->
-<!-- ══════════════ NAVBAR CORREGIDA ══════════════ -->
 <nav class="navbar" id="navbar">
   <div class="container navbar__inner">
     <a href="javascript:void(0)" class="navbar__brand" onclick="showSection('inicio')">
-      <!-- Imagen local con Thymeleaf -->
       <img class="navbar__logo" th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
       <div class="navbar__name">
         <div class="navbar__name-main">La Herradura</div>
@@ -529,7 +602,6 @@
     </button>
   </div>
   
-  <!-- MENÚ MÓVIL CORREGIDO (sin return false) -->
   <div class="navbar__mobile" id="mobile-menu">
     <div class="container">
       <a href="javascript:void(0)" onclick="showSection('inicio');toggleMenu();">Inicio</a>
@@ -551,6 +623,10 @@
       <img src="/images/AgroveterinariaH1.jpg" alt="Campo ganadero tropical" />
     </div>
     <div class="hero__stripe"></div>
+    <!-- LOGO SUPUESTO -->
+    <div class="hero__logo">
+      <img th:src="@{/images/Logotipo.jpg}" alt="Logo Agroveterinaria La Herradura" />
+    </div>
     <div class="hero__content">
       <div class="container">
         <div class="hero__inner">
@@ -565,20 +641,18 @@
           <p class="hero__subtitle">
             Medicina veterinaria, insumos agropecuarios y asesoramiento técnico para los productores y familias de la región de Los Tuxtlas.
           </p>
-			<div class="hero__actions">
-			  <a href="javascript:void(0)" class="btn-primary" onclick="showSection('quienes')">
-			    Conocenos
-			    <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-			  </a>
-			  <a href="javascript:void(0)" class="btn-outline" onclick="showSection('blog')">
-			    Leer artículos
-			    <svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-			  </a>
-			</div>
+          <div class="hero__actions">
+            <a href="javascript:void(0)" class="btn-primary" onclick="showSection('quienes')">
+              Conocenos
+              <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="javascript:void(0)" class="btn-outline" onclick="showSection('blog')">
+              Leer artículos
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
           <div class="hero__stats">
-            <div class="hero__stat"><div class="hero__stat-val">+25</div><div class="hero__stat-label">Años de experiencia</div></div>
             <div class="hero__stat"><div class="hero__stat-val">500+</div><div class="hero__stat-label">Clientes atendidos</div></div>
-            <div class="hero__stat"><div class="hero__stat-val">3</div><div class="hero__stat-label">Especialistas</div></div>
           </div>
         </div>
       </div>
@@ -664,7 +738,6 @@
           <p>Agroveterinaria La Herradura nació en Catemaco, Veracruz, como una propuesta familiar para atender las necesidades del campo y los animales en la región de Los Tuxtlas. Con el paso de los años, crecimos en equipo, en servicios y en compromiso.</p>
           <p>Hoy somos un centro integral de medicina veterinaria e insumos agropecuarios, con la calidez y la cercanía de siempre. Nos especializamos en las condiciones del trópico húmedo y conocemos de cerca los retos que enfrenta el productor de la sierra veracruzana.</p>
           <div class="about__logo-row">
-            <!-- Imagen local con Thymeleaf -->
             <img th:src="@{/images/Logotipo.jpg}" alt="Logo Agroveterinaria La Herradura" />
             <div>
               <div class="about__logo-name">La Herradura</div>
@@ -850,7 +923,6 @@
     <div class="footer__grid">
       <div>
         <div class="footer__brand">
-          <!-- Imagen local con Thymeleaf -->
           <img th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
           <div>
             <div class="footer__brand-name">Agroveterinaria La Herradura</div>
@@ -910,6 +982,19 @@
     document.getElementById('icon-close').style.display = open ? ''      : 'none';
   }
 </script>
-
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const imagenes = [
+      '/images/AgroveterinariaH1.jpg',
+      '/images/AgroveterinariaH2.jpg',
+      '/images/AgroveterinariaH3.jpg'
+    ];
+    const indice = Math.floor(Math.random() * imagenes.length);
+    const imgHero = document.querySelector('.hero__bg img');
+    if (imgHero) {
+      imgHero.src = imagenes[indice];
+    }
+  });
+</script>
 </body>
 </html>
