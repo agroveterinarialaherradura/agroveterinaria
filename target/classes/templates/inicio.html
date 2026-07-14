@@ -83,47 +83,85 @@
     .section-title em { font-style: normal; }
 
     /* ── Navbar ── */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: #fff; border-bottom: 1px solid rgba(0,0,0,.1);
-      box-shadow: 0 1px 8px rgba(0,0,0,.07);
-    }
-    .navbar__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 4rem;
-    }
-    .navbar__brand {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-    }
-    .navbar__logo {
-      height: 2.75rem;
-      width: 2.75rem;
-      object-fit: contain;
-      border-radius: .25rem;
-    }
-    .navbar__name { line-height: 1.2; }
-    .navbar__name-main {
-      font-family: 'Playfair Display', serif;
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--red);
-      letter-spacing: .02em;
-    }
-    .navbar__name-sub {
-      font-size: .6rem;
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      color: var(--muted);
-    }
-    /* Enlaces (escritorio) */
+	.navbar {
+	  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+	  background: #fff; border-bottom: 1px solid rgba(0,0,0,.1);
+	  box-shadow: 0 1px 8px rgba(0,0,0,.07);
+	}
+	.navbar__inner {
+	  display: flex;
+	  align-items: center;
+	  justify-content: space-between;
+	  height: 4rem;
+	}
+	.navbar__brand {
+	  display: flex;
+	  align-items: center;
+	  gap: .75rem;
+	}
+	.navbar__logo {
+	  height: 2.75rem;
+	  width: 2.75rem;
+	  object-fit: contain;
+	  border-radius: .25rem;
+	}
+	.navbar__name { line-height: 1.2; }
+	.navbar__name-main {
+	  font-family: 'Playfair Display', serif;
+	  font-size: .85rem;
+	  font-weight: 700;
+	  color: var(--red);
+	  letter-spacing: .02em;
+	}
+	.navbar__name-sub {
+	  font-size: .6rem;
+	  text-transform: uppercase;
+	  letter-spacing: .18em;
+	  color: var(--muted);
+	}
+
+	/* Enlaces (escritorio y tablet) - ahora alineados a la derecha */
+	.navbar__links {
+	  display: flex;
+	  align-items: center;
+	  gap: 2rem;
+	  margin-left: auto;   /* <--- empuja el menú a la derecha */
+	}
+	.navbar__link {
+	  font-size: .85rem;
+	  font-weight: 500;
+	  color: var(--dark);
+	  transition: color .2s;
+	  padding-bottom: 2px;
+	  border-bottom: 2px solid transparent;
+	}
+	.navbar__link:hover,
+	.navbar__link.active {
+	  color: var(--red);
+	  font-weight: 700;
+	  border-bottom-color: var(--red);
+	}
+	.navbar__cta {
+	  display: flex;
+	  align-items: center;
+	  gap: .4rem;
+	  background: var(--red);
+	  color: #fff;
+	  font-size: .75rem;
+	  font-weight: 700;
+	  letter-spacing: .05em;
+	  padding: .5rem 1rem;
+	  border-radius: .25rem;
+	  transition: opacity .2s;
+	}
+	.navbar__cta:hover { opacity: .88; }
+
+    /* Enlaces (escritorio y tablet) */
     .navbar__links {
       display: flex;
       align-items: center;
       gap: 2rem;
+      margin-left: auto;
     }
     .navbar__link {
       font-size: .85rem;
@@ -154,14 +192,33 @@
     }
     .navbar__cta:hover { opacity: .88; }
 
-    /* Botones móvil (Blog + Hamburguesa) */
+    /* Botones móvil (Emergencia + Blog + Hamburguesa) */
     .navbar__actions {
       display: flex;
       align-items: center;
-      gap: .25rem;
+      gap: .5rem;
+    }
+    .navbar__emergencia {
+      display: none;  /* oculto en escritorio/tablet */
+      align-items: center;
+      gap: .3rem;
+      background: var(--red);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .4rem .75rem;
+      border-radius: .25rem;
+      border: 1px solid var(--red);
+      transition: background .2s, opacity .2s;
+      text-decoration: none;
+    }
+    .navbar__emergencia:hover {
+      background: #a01515;
+      opacity: .9;
     }
     .navbar__blog {
-      display: none;  /* solo visible en móvil con media query */
+      display: none;  /* solo visible en móvil */
       align-items: center;
       gap: .3rem;
       background: transparent;
@@ -180,7 +237,7 @@
       color: #fff;
     }
     .navbar__burger {
-      display: none;  /* solo visible en móvil con media query */
+      display: none;  /* solo visible en móvil */
       color: var(--red);
       padding: .25rem;
     }
@@ -208,7 +265,7 @@
     .hero__bg::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to top, #1A3A1A 30%, rgba(30, 80, 30, 0.55) 65%, transparent);
+      background: linear-gradient(to top, #1A3A1A 30%, rgba(30, 80, 30, 0.55) 5%, transparent);
     }
     .hero__logo {
       position: absolute;
@@ -672,7 +729,18 @@
     .icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     /* ── Responsive ── */
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
+      /* Ajustes para tablet si es necesario */
+      .navbar__link {
+        font-size: .8rem;
+      }
+      .navbar__cta {
+        font-size: .7rem;
+        padding: .4rem .8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
       .navbar__links {
         display: none;
       }
@@ -680,6 +748,9 @@
         display: block;
       }
       .navbar__blog {
+        display: inline-flex;
+      }
+      .navbar__emergencia {
         display: inline-flex;
       }
       .navbar__mobile.open {
@@ -729,7 +800,7 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 480px) {
       .hero {
         min-height: 55vh;
         padding-bottom: 1rem;
@@ -792,7 +863,7 @@
       </div>
     </a>
 
-    <!-- Enlaces (escritorio) -->
+    <!-- Enlaces (escritorio y tablet) -->
     <div class="navbar__links">
       <a class="navbar__link active" href="javascript:void(0)" onclick="showSection('inicio')">Inicio</a>
       <a class="navbar__link" href="javascript:void(0)" onclick="showSection('quienes')">Quiénes Somos</a>
@@ -803,8 +874,14 @@
       </a>
     </div>
 
-    <!-- Acciones móvil (Blog + Hamburguesa) -->
+    <!-- Acciones móvil (Emergencia + Blog + Hamburguesa) -->
     <div class="navbar__actions">
+      <a class="navbar__emergencia" href="tel:012949431869">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        Emergencia
+      </a>
       <button class="navbar__blog" onclick="showSection('blog');">
         <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
         Blog
@@ -848,7 +925,7 @@
             <span>Catemaco, Veracruz · México</span>
           </div>
           <h1 class="hero__title">
-            Tu campo y<br>
+            En el campo,<br>
             <em>tus animales</em>,<br>
             en buenas manos.
           </h1>
@@ -869,7 +946,7 @@
           <div class="hero__stats">
             <div class="hero__stat">
               <div class="hero__stat-val" id="visitantes-hero">Cargando...</div>
-              <div class="hero__stat-label">Visitantes totales</div>
+              <div class="hero__stat-label">No Visitante</div>
             </div>
           </div>
           <!-- FIN CONTADOR -->
@@ -883,7 +960,7 @@
     <div class="container">
       <div class="section-label"><span>Nuestros Servicios</span></div>
       <h2 class="section-title" style="max-width:32rem;margin-bottom:0">
-        Todo lo que necesita tu campo, en un solo lugar.
+        Todo lo que necesitan tus tierras, en un solo lugar.
       </h2>
       <div class="services__grid">
         <div class="service-card">
@@ -1101,7 +1178,7 @@
           </article>
 
           <div class="newsletter">
-            <h4>Recibí consejos en tu correo</h4>
+            <h4>Recibe consejos en tu correo</h4>
             <p>Novedades de sanidad y agronomía cada mes, sin spam.</p>
             <div class="newsletter__form">
               <input class="newsletter__input" type="email" placeholder="tu@correo.com" />
