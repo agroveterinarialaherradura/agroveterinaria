@@ -57,6 +57,7 @@
       --card:  #FFFFFF;
       --alt:   #F0EBE3;
     }
+    
 
     /* ── Utilities ── */
     .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
@@ -256,17 +257,20 @@
       padding-top: 8rem;
       margin-top: 0;
     }
-    .hero__title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 8vw, 4.5rem);
-      font-weight: 700; color: #fff;
-      line-height: 1.05; margin-bottom: 1.25rem;
-    }
+.hero__title {
+    font-size: clamp(1.8rem, 5vw, 3.2rem); /* tamaño fluido */
+    line-height: 1.4;  /* más espacio entre líneas */
+    letter-spacing: 0.02em; /* ligera separación entre letras */
+    word-break: break-word; /* evita desbordes */
+    max-width: 90%; /* para que no se pegue a los bordes */
+    margin: 0 auto;
+}
     .hero__title em { font-style: normal; color: var(--red); }
     .hero__subtitle {
       font-size: 1.1rem; line-height: 1.7;
       color: #C8C8C8; max-width: 34rem;
       margin-bottom: 2.25rem;
+      
     }
     .hero__actions {
       display: flex;
@@ -701,7 +705,17 @@
         padding: .4rem .8rem;
       }
     }
-
+/* En móviles (ya tienes un media query) */
+@media (max-width: 600px) {
+    .hero__title {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+        line-height: 1.3;
+        padding: 0 0.5rem;
+    }
+    .hero__title br {
+        display: block; /* asegura que los saltos funcionen */
+    }
+}
     @media (min-width: 769px) {
       /* Navbar: todo a la derecha */
       .navbar__inner {
@@ -915,9 +929,10 @@
             <span>Catemaco, Veracruz · México</span>
           </div>
           <h1 class="hero__title">
-            Tu campo y<br>
-            <em>tus animales</em>,<br>
-            en buenas manos.
+            <span style="color: #ffffff;">Mis 
+            <br>pacientes son mi pasión,</span><br>
+            <em>tanto en Animales como el Campo</em>,<br>
+            <span style="color: #ffffff;">juntos sanando Heridas y tratando Enfermedades.</span>
           </h1>
           <p class="hero__subtitle">
             Medicina veterinaria, insumos agropecuarios y asesoramiento técnico para los productores y familias de la región de Los Tuxtlas.
