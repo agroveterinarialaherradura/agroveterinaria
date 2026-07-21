@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.AgroVeterinaria.DTO.ResumenVisitas;
-import com.AgroVeterinaria.Herramientas.Constantes;
-import com.AgroVeterinaria.Registro.Visitas.VisitasExternasService;
 import com.AgroVeterinaria.DTO.Usuarios;
+import com.AgroVeterinaria.Herramientas.Constantes;
 import com.AgroVeterinaria.Registro.Usuarios.UsuarioExternasService;
+import com.AgroVeterinaria.Registro.Visitas.VisitasExternasService;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.validation.Valid;
 
 @Controller
 public class AuthController {
@@ -28,23 +27,52 @@ public class AuthController {
     @Autowired
     private VisitasExternasService visitasExternasService;
 
+    // ===== MOSTRAR FORMULARIO DE REGISTRO =====
+    @GetMapping("/registro")
+    public String mostrarRegistro(Model model) {
+        // Si el modelo ya tiene un usuario, no lo sobrescribimos
+        if (!model.containsAttribute("usuario")) {
+            model.addAttribute("usuario", new Usuarios());
+        }
+        return "registro";
+    }
+
     // ===== REGISTRO DE USUARIO =====
     @PostMapping("/registro")
     public String registrarUsuario(@Valid @ModelAttribute("usuario") Usuarios usuario,
                                    BindingResult result,
+                                   Model model,
                                    RedirectAttributes redirectAttributes) {
+        
+        // Si hay errores de validación, regresamos al formulario con los errores
         if (result.hasErrors()) {
-            return "inicio";
+            // Mantenemos el objeto usuario en el modelo para mostrar los datos ingresados
+            model.addAttribute("usuario", usuario);
+            return "registro";
         }
 
-        // Delegar el registro a Heroku vía API
-        Map<String, String> response = usuarioExternasService.registrarUsuario(usuario);
-        if (response.containsKey("error")) {
-            redirectAttributes.addFlashAttribute("error", response.get("error"));
-            return "redirect:/";
+        try {
+            // Delegar el registro a Heroku vía API
+            Map<String, String> response = usuarioExternasService.registrarUsuario(usuario);
+            
+            if (response.containsKey("error")) {
+                // Si hay error del servicio externo, lo mostramos
+                model.addAttribute("error", response.get("error"));
+                model.addAttribute("usuario", usuario);
+                return "registro";
+            }
+            
+            // Registro exitoso
+            redirectAttributes.addFlashAttribute("mensaje", 
+                response.getOrDefault("mensaje", "Registro exitoso. Revisa tu correo para activar tu cuenta."));
+            return "redirect:/login";
+            
+        } catch (Exception e) {
+            System.err.println("Error en registro: " + e.getMessage());
+            model.addAttribute("error", "Error al registrar: " + e.getMessage());
+            model.addAttribute("usuario", usuario);
+            return "registro";
         }
-        redirectAttributes.addFlashAttribute("mensaje", response.get("mensaje"));
-        return "redirect:/";
     }
 
     // ===== PANEL DE VISITAS =====
@@ -88,15 +116,11 @@ public class AuthController {
         return "visitas";
     }
 
-    // ===== (OPCIONAL) Si necesitas la funcionalidad /clave, la delegas a Heroku =====
-    // Pero Railway no debería manejar esto, mejor que el usuario vaya directamente a Heroku.
-    // Puedes redirigir a la URL de Heroku para ese flujo.
+    // ===== REDIRECCIÓN PARA CLAVE =====
     @PostMapping("/clave")
     public String addClave(Usuarios usuario, RedirectAttributes redirectAttributes) {
-        // Redirigir a Heroku para que maneje el envío de correo
-        // Ejemplo: return "redirect:https://tupaginawebhoy-fe12dd345e09.herokuapp.com/clave";
-        // O bien, usar el servicio externo si existe un endpoint para esto.
-        redirectAttributes.addFlashAttribute("error", "Esta funcionalidad no está disponible en Railway. Por favor, regístrate en la página principal.");
+        redirectAttributes.addFlashAttribute("error", 
+            "Esta funcionalidad no está disponible en Railway. Por favor, regístrate en la página principal.");
         return "redirect:/";
     }
 }

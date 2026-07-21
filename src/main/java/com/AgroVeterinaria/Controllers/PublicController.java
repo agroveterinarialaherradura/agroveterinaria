@@ -1,17 +1,17 @@
 package com.AgroVeterinaria.Controllers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.AgroVeterinaria.DTO.ResumenVisitas;
 import com.AgroVeterinaria.DTO.Usuarios;
 import com.AgroVeterinaria.Herramientas.Constantes;
 import com.AgroVeterinaria.Registro.Visitas.VisitasExternasService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PublicController {
@@ -29,12 +29,9 @@ public class PublicController {
         model.addAttribute("mes", hoy.getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es", "MX")));
         model.addAttribute("anio", hoy.getYear());
         model.addAttribute("usuario", new Usuarios());
-        // ❌ No llamamos a visitasExternasService aquí
-        // ✅ En su lugar, dejamos que el frontend cargue las estadísticas vía AJAX
         return "inicio";
     }
-    
-    
+      
     @GetMapping("/api/stats/inicio")
     @ResponseBody
     public ResumenVisitas getStatsInicio() {
@@ -42,9 +39,21 @@ public class PublicController {
             return visitasExternasService.procesarVisitas(Constantes.ORIGEN_MAY);
         } catch (Exception e) {
             System.err.println("Error al obtener stats: " + e.getMessage());
-            return new ResumenVisitas(); // Vacío en caso de error
+            return new ResumenVisitas();
         }
     }
+    
+    @GetMapping("/api/stats/blog")
+    @ResponseBody
+    public ResumenVisitas getStatsBlog() {
+        try {
+            return visitasExternasService.procesarVisitas("blog");
+        } catch (Exception e) {
+            System.err.println("Error al obtener stats del blog: " + e.getMessage());
+            return new ResumenVisitas();
+        }
+    }
+    
     @GetMapping("/aviso-privacidad")
     public String avisoPrivacidad() {
         return "aviso-privacidad";
@@ -61,7 +70,10 @@ public class PublicController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        if (!model.containsAttribute("usuario")) {
+            model.addAttribute("usuario", new Usuarios());
+        }
         return "login";
     }
 }
