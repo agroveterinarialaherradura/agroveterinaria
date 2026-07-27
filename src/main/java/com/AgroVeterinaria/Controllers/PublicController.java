@@ -41,7 +41,7 @@ public class PublicController {
      */
     @GetMapping("/quienes")
     public String quienes(Model model) {
-        return "/productos/quienes";
+        return "productos/quienes";
     }
     
     @GetMapping("/api/stats/inicio")
