@@ -121,7 +121,6 @@
     color: var(--muted);
   }
 
-  /* Enlaces (escritorio y tablet) */
   .navbar__links {
     display: flex;
     align-items: center;
@@ -156,7 +155,6 @@
   }
   .navbar__cta:hover { opacity: .88; }
 
-  /* Botones móvil */
   .navbar__actions {
     display: flex;
     align-items: center;
@@ -302,7 +300,6 @@
     letter-spacing: .05em;
   }
 
-  /* Botones */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -585,7 +582,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  /* Newsletter */
   .newsletter {
     background: var(--green);
     border-radius: .375rem;
@@ -691,42 +687,26 @@
   }
   .footer__bottom span:last-child { color: #444; }
 
-  /* ── Icons ── */
   .icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
-    .navbar__link {
-      font-size: .8rem;
-    }
-    .navbar__cta {
-      font-size: .7rem;
-      padding: .4rem .8rem;
-    }
+    .navbar__link { font-size: .8rem; }
+    .navbar__cta { font-size: .7rem; padding: .4rem .8rem; }
   }
 
-  /* En móviles (ya tienes un media query) */
   @media (max-width: 600px) {
     .hero__title {
       font-size: clamp(1.4rem, 5vw, 1.8rem);
       line-height: 1.3;
       padding: 0 0.5rem;
     }
-    .hero__title br {
-      display: block;
-    }
+    .hero__title br { display: block; }
   }
 
   @media (min-width: 769px) {
-    /* Navbar: todo a la derecha */
-    .navbar__inner {
-      justify-content: flex-end;
-    }
-    .navbar__brand {
-      margin-right: 2rem;
-    }
-
-    /* Logo superpuesto en el Hero: alineado a la derecha */
+    .navbar__inner { justify-content: flex-end; }
+    .navbar__brand { margin-right: 2rem; }
     .hero__logo {
       left: auto;
       right: 2rem;
@@ -738,21 +718,11 @@
   }
 
   @media (max-width: 768px) {
-    .navbar__inner {
-      justify-content: space-between;
-    }
-    .navbar__links {
-      display: none;
-    }
-    .navbar__burger {
-      display: block;
-    }
-    .navbar__blog {
-      display: inline-flex;
-    }
-    .navbar__emergencia {
-      display: inline-flex;
-    }
+    .navbar__inner { justify-content: space-between; }
+    .navbar__links { display: none; }
+    .navbar__burger { display: block; }
+    .navbar__blog { display: inline-flex; }
+    .navbar__emergencia { display: inline-flex; }
     .navbar__mobile.open {
       display: block;
       padding: 1rem 1.5rem 1.5rem;
@@ -785,7 +755,6 @@
       min-height: 70vh;
       padding-bottom: 1.5rem;
     }
-    /* ═══ LOGO A LA IZQUIERDA EN MÓVIL ═══ */
     .hero__logo {
       left: 1.5rem;
       transform: none;
@@ -794,15 +763,9 @@
       max-width: 130px;
       top: 6%;
     }
-    .hero__inner {
-      padding-top: 7rem;
-    }
-    .hero__title {
-      font-size: clamp(2.2rem, 7vw, 3rem);
-    }
-    .hero__subtitle {
-      font-size: 1rem;
-    }
+    .hero__inner { padding-top: 7rem; }
+    .hero__title { font-size: clamp(2.2rem, 7vw, 3rem); }
+    .hero__subtitle { font-size: 1rem; }
   }
 
   @media (max-width: 480px) {
@@ -810,16 +773,13 @@
       min-height: 55vh;
       padding-bottom: 1rem;
     }
-    /* ═══ LOGO A LA IZQUIERDA EN MÓVIL PEQUEÑO ═══ */
     .hero__logo {
       left: 1rem;
       width: min(70px, 18vw);
       max-width: 90px;
       top: 4%;
     }
-    .hero__inner {
-      padding-top: 7.5rem;
-    }
+    .hero__inner { padding-top: 7.5rem; }
     .hero__title {
       font-size: clamp(1.5rem, 7vw, 2rem);
       margin-bottom: 0.75rem;
@@ -845,26 +805,18 @@
     .hero__stat {
       padding: 0.75rem 1rem;
     }
-    .hero__stat-val {
-      font-size: 1.3rem;
-    }
-    .hero__stat-label {
-      font-size: 0.6rem;
-    }
-    .services__grid {
-      grid-template-columns: 1fr;
-    }
+    .hero__stat-val { font-size: 1.3rem; }
+    .hero__stat-label { font-size: 0.6rem; }
+    .services__grid { grid-template-columns: 1fr; }
   }
 </style>
-
 </head>
 <body>
 
 <!-- ══════════════ NAVBAR ══════════════ -->
 <nav class="navbar" id="navbar">
   <div class="container navbar__inner">
-    <!-- Logo -->
-    <a href="javascript:void(0)" class="navbar__brand" onclick="showSection('inicio')">
+    <a href="/" class="navbar__brand">
       <img class="navbar__logo" th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
       <div class="navbar__name">
         <div class="navbar__name-main">La Herradura</div>
@@ -872,29 +824,26 @@
       </div>
     </a>
 
-    <!-- Enlaces (escritorio y tablet) -->
     <div class="navbar__links">
-      <a class="navbar__link active" href="javascript:void(0)" onclick="showSection('inicio')">Inicio</a>
-      <a class="navbar__link" href="javascript:void(0)" onclick="showSection('quienes')">Quiénes Somos</a>
-      <a class="navbar__link" href="javascript:void(0)" onclick="showSection('blog')">Blog</a>
-      <a class="navbar__cta" href="tel:012949431869">
+      <a class="navbar__link active" href="/">Inicio</a>
+      <a class="navbar__link" href="/quienes">Quiénes Somos</a>
+      <a class="navbar__link" href="/blog">Blog</a>
+      <a class="navbar__cta" href="tel:522292535057">
         <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-        (01-294) 943-18-69
+        (52-1) 22 9253 5057
       </a>
     </div>
 
-    <!-- Acciones móvil (Emergencia + Blog + Hamburguesa) -->
     <div class="navbar__actions">
-      <a class="navbar__emergencia" href="tel:012949431869">
+      <a class="navbar__emergencia" href="tel:522292535057">
         <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
         </svg>
-        
       </a>
-      <button class="navbar__blog" onclick="showSection('blog');">
+      <a class="navbar__blog" href="/blog">
         <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
         Blog
-      </button>
+      </a>
       <button class="navbar__burger" onclick="toggleMenu()" aria-label="Menú">
         <svg id="icon-menu" class="icon" style="width:1.4rem;height:1.4rem" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         <svg id="icon-close" class="icon" style="width:1.4rem;height:1.4rem;display:none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -904,10 +853,10 @@
   
   <div class="navbar__mobile" id="mobile-menu">
     <div class="container">
-      <a href="javascript:void(0)" onclick="showSection('inicio');toggleMenu();">Inicio</a>
-      <a href="javascript:void(0)" onclick="showSection('quienes');toggleMenu();">Quiénes Somos</a>
-      <a href="javascript:void(0)" onclick="showSection('blog');toggleMenu();">Blog</a>
-      <a class="navbar__cta-mobile" href="tel:012949431869">Llamar</a>
+      <a href="/">Inicio</a>
+      <a href="/quienes">Quiénes Somos</a>
+      <a href="/blog">Blog</a>
+      <a class="navbar__cta-mobile" href="tel:522292535057">Llamar</a>
     </div>
   </div>
 </nav>
@@ -920,10 +869,9 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero__bg">
-      <img src="/images/AgroveterinariaH1.jpg" alt="Campo ganadero tropical" />
+      <img id="hero-image" src="/images/AgroveterinariaH1.jpg" alt="Campo ganadero tropical" />
     </div>
     <div class="hero__stripe"></div>
-    <!-- LOGO (se alinea a la derecha en PC/tablet) -->
     <div class="hero__logo">
       <img th:src="@{/images/Logotipo.jpg}" alt="Logo Agroveterinaria La Herradura" />
     </div>
@@ -936,30 +884,27 @@
           <h1 class="hero__title">
             <span style="color: #ffffff;">Mis 
             <br>pacientes son mi pasión,</span><br>
-            <em>tanto en Animales como en el Campo</em>,<br>
-            
+            <em>tanto en Animales como en el Campo</em>.<br>
           </h1>
           <p class="hero__subtitle">
             Medicina veterinaria, insumos agropecuarios y asesoramiento técnico para los productores y familias de la región de Los Tuxtlas.
           </p>
           <div class="hero__actions">
-            <a href="javascript:void(0)" class="btn-primary" onclick="showSection('quienes')">
+            <a href="/quienes" class="btn-primary">
               Conocenos
               <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a href="javascript:void(0)" class="btn-outline" onclick="showSection('blog')">
+            <a href="/blog" class="btn-outline">
               Leer artículos
               <svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </a>
           </div>
-          <!-- CONTADOR DE VISITAS EN EL HERO -->
           <div class="hero__stats">
             <div class="hero__stat">
               <div class="hero__stat-val" id="visitantes-hero">Cargando...</div>
               <div class="hero__stat-label">VISITANTE NO</div>
             </div>
           </div>
-          <!-- FIN CONTADOR -->
         </div>
       </div>
     </div>
@@ -1017,7 +962,7 @@
           </span>
           <span class="contact-banner__item">
             <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            agroveterinarialaherradura.mx@gmail.com
+            agroveterinaria.mx@gmail.com
           </span>
         </div>
       </div>
@@ -1026,200 +971,6 @@
   </div>
 
 </div><!-- /section-inicio -->
-
-
-<!-- ══════════════ QUIÉNES SOMOS ══════════════ -->
-<div id="section-quienes" style="display:none;">
-
-  <section class="about">
-    <div class="container">
-      <div class="section-label"><span>Quiénes Somos</span></div>
-      <div class="about__split">
-        <div class="about__text">
-          <h2 class="section-title">
-            Más de 25 años<br>
-            <em style="color:#3A8B35">al lado del ganadero</em><br>
-            veracruzano.
-          </h2>
-          <p>Agroveterinaria La Herradura nació en Catemaco, Veracruz, como una propuesta familiar para atender las necesidades del campo y los animales en la región de Los Tuxtlas. Con el paso de los años, crecimos en equipo, en servicios y en compromiso.</p>
-          <p>Hoy somos un centro integral de medicina veterinaria e insumos agropecuarios, con la calidez y la cercanía de siempre. Nos especializamos en las condiciones del trópico húmedo y conocemos de cerca los retos que enfrenta el productor de la sierra veracruzana.</p>
-          <div class="about__logo-row">
-            <img th:src="@{/images/Logotipo.jpg}" alt="Logo Agroveterinaria La Herradura" />
-            <div>
-              <div class="about__logo-name">La Herradura</div>
-              <div class="about__logo-sub">Agroveterinaria · Catemaco, Ver.</div>
-            </div>
-          </div>
-          <div class="about__badges">
-            <span class="badge">🌿 Compromiso ambiental</span>
-            <span class="badge">❤️ Bienestar animal</span>
-            <span class="badge">📖 Actualización continua</span>
-          </div>
-        </div>
-        <div class="about__collage">
-          <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=500&h=600&fit=crop&auto=format" alt="Veterinario en campo" />
-          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=280&fit=crop&auto=format" alt="Cultivos tropicales" />
-          <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&h=280&fit=crop&auto=format" alt="Ganado bovino" />
-        </div>
-      </div>
-
-      <!-- Team -->
-      <h3 class="about__team-title">Nuestro equipo</h3>
-      <div class="about__team">
-        <div class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="/images/VictorVertical.jpg" alt="Dr. Victor C. Pacheco" />
-          </div>
-          <div class="team-card__role">Médico Veterinario — Bovinos y Équidos</div>
-          <div class="team-card__name">Dr. Victor C. Pacheco</div>
-          <p class="team-card__bio">Más de 20 años de experiencia en ganadería tropical. Especialista en sanidad bovina en la región de Los Tuxtlas, Veracruz.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=500&fit=crop&auto=format" alt="Ing. Patricia Ramírez" />
-          </div>
-          <div class="team-card__role">Ingeniera Agrónoma</div>
-          <div class="team-card__name">Ing. Patricia Ramírez</div>
-          <p class="team-card__bio">Especialista en cultivos tropicales, manejo de suelos y nutrición vegetal para las condiciones climáticas de Catemaco.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-card__img-wrap">
-            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=500&fit=crop&auto=format" alt="Dra. Ana Lucía Flores" />
-          </div>
-          <div class="team-card__role">Médica Veterinaria — Pequeños Animales</div>
-          <div class="team-card__name">Dra. Ana Lucía Flores</div>
-          <p class="team-card__bio">Apasionada por la clínica de pequeños animales, con formación en cirugía y medicina preventiva.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="contact-banner">
-    <div class="container contact-banner__inner">
-      <div>
-        <p class="contact-banner__label">Encuéntranos</p>
-        <div class="contact-banner__items">
-          <span class="contact-banner__item">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-            (52-1) 22 9253 5057
-          </span>
-          <span class="contact-banner__item">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            2 de Abril No. 12-3, C.P. 95870 Centro de Catemaco, Ver.
-          </span>
-        </div>
-      </div>
-      <span class="contact-banner__hours">Lun–Dom: 8:00 – 19:00</span>
-    </div>
-  </div>
-
-</div><!-- /section-quienes -->
-
-
-<!-- ══════════════ BLOG ══════════════ -->
-<div id="section-blog" style="display:none;">
-
-  <section class="blog">
-    <div class="container">
-      <div class="blog__header">
-        <div>
-          <div class="section-label"><span>Blog & Novedades</span></div>
-          <h2 class="section-title">
-            Consejos, novedades<br>y noticias del campo.
-          </h2>
-        </div>
-        <a href="#" class="btn-outline-red">
-          Todos los artículos
-          <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-      </div>
-
-      <div class="blog__grid">
-        <!-- Featured -->
-        <article class="blog-featured">
-          <div class="blog-featured__img">
-            <img src="/images/AgroveterinariaH1.jpg" alt="Control de garrapatas en ganado bovino" />
-          </div>
-          <div class="blog-featured__body">
-            <div class="blog-meta">
-              <span class="blog-cat">Sanidad Animal</span>
-              <span class="blog-date">
-                <svg class="icon" style="width:.85em;height:.85em" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                10 Jun 2025
-              </span>
-            </div>
-            <h3 class="blog-featured__title">Control de garrapatas en ganado bovino: estrategias para el trópico veracruzano</h3>
-            <p class="blog-featured__excerpt">El clima húmedo de la región de Los Tuxtlas favorece la proliferación de garrapatas. Te explicamos los esquemas de control más efectivos para proteger tu hato.</p>
-            <div class="blog-author">
-              <svg class="icon" style="width:.9em;height:.9em" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              Dr. Victor C. Pacheco
-            </div>
-          </div>
-        </article>
-
-        <!-- Sidebar -->
-        <div class="blog-sidebar">
-          <article class="blog-card">
-            <div class="blog-card__thumb">
-              <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=300&h=200&fit=crop&auto=format" alt="Temporada de lluvias" />
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-meta" style="margin-bottom:.5rem">
-                <span class="blog-cat blog-cat--green">Agronomía</span>
-                <span class="blog-date">25 May 2025</span>
-              </div>
-              <h4 class="blog-card__title">Temporada de lluvias: cómo preparar tus cultivos en Catemaco</h4>
-              <p class="blog-card__excerpt">La época de lluvias en la Sierra de Santa Marta exige un manejo cuidadoso del suelo. Conocé las prácticas recomendadas para maximizar tu cosecha.</p>
-            </div>
-          </article>
-
-          <article class="blog-card">
-            <div class="blog-card__thumb">
-              <img src="/images/Selfie013.jpg" alt="Vacunación mascotas" />
-            </div>
-            <div class="blog-card__body">
-              <div class="blog-meta" style="margin-bottom:.5rem">
-                <span class="blog-cat blog-cat--green">Mascotas</span>
-                <span class="blog-date">8 May 2025</span>
-              </div>
-              <h4 class="blog-card__title">Vacunación anual para perros y gatos: ¿qué vacunas necesitan?</h4>
-              <p class="blog-card__excerpt">El calendario de vacunación es fundamental para la salud de tus mascotas. Te contamos qué vacunas aplican y en qué momento del año.</p>
-            </div>
-          </article>
-
-          <div class="newsletter">
-            <h4>Recibe consejos en tu correo</h4>
-            <p>Novedades de sanidad y agronomía cada mes, sin spam.</p>
-            <div class="newsletter__form">
-              <input class="newsletter__input" type="email" placeholder="tu@correo.com" />
-              <button class="newsletter__btn">OK</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="contact-banner">
-    <div class="container contact-banner__inner">
-      <div>
-        <p class="contact-banner__label">Encuéntranos</p>
-        <div class="contact-banner__items">
-          <span class="contact-banner__item">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-            (52-1) 22 9253 5057
-          </span>
-          <span class="contact-banner__item">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            2 de Abril No. 12-3, C.P. 95870 Centro de Catemaco, Ver.
-          </span>
-        </div>
-      </div>
-      <span class="contact-banner__hours">Lun–Dom: 8:00 – 19:00</span>
-    </div>
-  </div>
-
-</div><!-- /section-blog -->
 
 </main>
 
@@ -1271,16 +1022,6 @@
 </footer>
 
 <script>
-  function showSection(id) {
-    ['inicio','quienes','blog'].forEach(s => {
-      document.getElementById('section-' + s).style.display = s === id ? '' : 'none';
-    });
-    document.querySelectorAll('.navbar__link').forEach((el, i) => {
-      el.classList.toggle('active', ['inicio','quienes','blog'][i] === id);
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
   function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
     const open = menu.classList.toggle('open');
@@ -1312,14 +1053,11 @@ $(document).ready(function() {
     $.get('/api/stats/inicio', function(data) {
         if (data && data.escritorio !== undefined) {
             var total = data.escritorio + data.movil + data.tablet + (data.otros || 0);
-            $('#visitantes').text(total);
             $('#visitantes-hero').text(total);
         } else {
-            $('#visitantes').text('No disponible');
             $('#visitantes-hero').text('No disponible');
         }
     }).fail(function() {
-        $('#visitantes').text('No disponible');
         $('#visitantes-hero').text('No disponible');
     });
 });

@@ -1,9 +1,3 @@
-<!-- Página Principal Tu Pagina Web Hoy
-    Created on : 10/11/2018, 02:03:20 PM
-    Author     : Fernando R. Betancourt
-    Cell       : 55 38153640
-    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
--->
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -11,19 +5,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <meta name="description" content="Blog de Agroveterinaria La Herradura. Consejos, novedades y noticias del campo, sanidad animal y cultivos tropicales en la región de Los Tuxtlas.">
-  <meta name="keywords" content="blog veterinario, sanidad animal, cultivos tropicales, ganadería, Los Tuxtlas, agronomía, mascotas">
+  <meta name="description" content="Alerta Sanitaria: Diarrea Explosiva en ganado. Conoce los síntomas, causas y la solución inmediata en Agroveterinaria La Herradura.">
+  <meta name="keywords" content="diarrea explosiva, alerta sanitaria, ganado, bovinos, salmonella, coccidia, deshidratación, veterinaria Catemaco">
   <meta name="author" content="Agroveterinaria La Herradura">
   <meta name="robots" content="index, follow">
   <meta name="language" content="Spanish">
   <meta name="geo.region" content="MX-VER">
   <meta name="geo.placename" content="Centro de Catemaco, Veracruz">
   
-  <title>Blog | Agroveterinaria La Herradura</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="🚨 Alerta Sanitaria: Diarrea Explosiva | Agroveterinaria La Herradura">
+  <meta property="og:description" content="La diarrea explosiva en ganado: causas, síntomas y solución inmediata. ¡Contáctanos para salvar a tus animales!">
+  <meta property="og:image" content="https://agroveterinaria.up.railway.app/images/DiarreaExplosivaH.jpg">
+  <meta property="og:url" content="https://agroveterinaria.up.railway.app/blog/DiarreaExplosiva">
+  
+  <title>🚨 Alerta Sanitaria: Diarrea Explosiva | Agroveterinaria La Herradura</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ── Reset & Base ── */
@@ -37,12 +38,15 @@
     /* ── Tokens ── */
     :root {
       --red:   #C41E1E;
+      --red-dark: #8B0000;
       --green: #3A8B35;
       --dark:  #1A1A1A;
       --muted: #6B6B6B;
       --bg:    #F9F6F1;
       --card:  #FFFFFF;
       --alt:   #F0EBE3;
+      --yellow: #FFD700;
+      --orange: #FF6B00;
     }
 
     /* ── Utilities ── */
@@ -185,247 +189,224 @@
     }
     .navbar__mobile { display: none; }
 
-    /* ── Blog ── */
-    .blog { background: var(--alt); padding: 6rem 1.5rem; }
-    .blog__header {
+    /* ── Hero de Alerta ── */
+    .alert-hero {
+      position: relative;
+      min-height: 70vh;
       display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      align-items: center;
+      padding: 6rem 0 4rem;
+      overflow: hidden;
     }
-    
-    /* ── Search Bar ── */
-    .search-card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-      padding: 20px 25px;
-      margin: 20px auto 40px;
-      max-width: 600px;
-      border: 1px solid rgba(0,0,0,0.06);
+    .alert-hero__bg {
+      position: absolute; inset: 0;
+      background: #0A0A0A;
     }
-    .search-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
+    .alert-hero__bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
     }
-    .search-box input {
-      flex: 1 1 240px;
-      padding: 12px 18px;
-      border: 2px solid #ddd;
-      border-radius: 30px;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.25s;
-      font-family: 'Nunito Sans', sans-serif;
+    .alert-hero__bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
     }
-    .search-box input:focus {
-      border-color: var(--red);
-      box-shadow: 0 0 0 3px rgba(196,30,30,0.15);
+    .alert-hero__stripe {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(90deg, var(--red) 0%, var(--red) 20%, var(--yellow) 20%, var(--yellow) 40%, var(--red) 40%, var(--red) 60%, var(--yellow) 60%, var(--yellow) 80%, var(--red) 80%, var(--red) 100%);
+      z-index: 2;
+      animation: stripePulse 1s ease-in-out infinite;
     }
-    .search-box button {
+    @keyframes stripePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .alert-hero__content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    .alert-hero__badge {
+      display: inline-block;
       background: var(--red);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      padding: 12px 28px;
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-      cursor: pointer;
-      white-space: nowrap;
-      font-family: 'Nunito Sans', sans-serif;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .4rem 1.2rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      animation: pulse 1.5s ease-in-out infinite;
+      border: 2px solid var(--yellow);
     }
-    .search-box button:hover {
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .alert-hero__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .alert-hero__title .highlight {
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    .alert-hero__subtitle {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #D0D0D0;
+      max-width: 40rem;
+      margin-bottom: 2rem;
+    }
+    .alert-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn-alert {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .05em;
+      padding: .875rem 1.8rem;
+      border-radius: .25rem;
+      transition: all .2s;
+      border: none;
+    }
+    .btn-alert-primary {
+      background: var(--red);
+      color: #fff;
+      border: 2px solid var(--yellow);
+    }
+    .btn-alert-primary:hover {
       background: #a01515;
+      transform: scale(1.02);
+    }
+    .btn-alert-secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.4);
+    }
+    .btn-alert-secondary:hover {
+      background: rgba(255,255,255,.1);
+      border-color: #fff;
     }
 
-    /* ── Grid de artículos ── */
-    .blog__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+    /* ── Contenido del Artículo ── */
+    .article-content {
+      background: var(--bg);
+      padding: 4rem 1.5rem;
     }
-    
-    /* ── Tarjeta de artículo ── */
-    .articulo-card {
+    .article-content__inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .article-content__body {
       background: var(--card);
-      border: 1px solid rgba(0,0,0,.1);
       border-radius: .5rem;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .article-content__body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    .article-content__body .emoji-big {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .article-content__body .highlight-box {
+      background: #FFF8E1;
+      border-left: 6px solid var(--yellow);
+      padding: 1.5rem 2rem;
+      border-radius: .25rem;
+      margin: 1.5rem 0;
+    }
+    .article-content__body .highlight-box--red {
+      background: #FFEBEE;
+      border-left-color: var(--red);
+    }
+    .article-content__body .highlight-box strong {
+      color: var(--red-dark);
+    }
+    .article-content__body .highlight-box .icon {
+      font-size: 1.5rem;
+      margin-right: .5rem;
+    }
+
+    /* ── Video Embed ── */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
       overflow: hidden;
-      transition: box-shadow .3s, transform .2s;
-      cursor: pointer;
+      border-radius: .5rem;
+      margin: 2rem 0;
+      background: #000;
+      border: 3px solid var(--yellow);
+      box-shadow: 0 8px 32px rgba(196,30,30,0.3);
     }
-    .articulo-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,.1);
-      transform: translateY(-3px);
-    }
-    .articulo-card__img {
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: #EDE8E0;
-    }
-    .articulo-card__img img {
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      transition: transform .5s;
-    }
-    .articulo-card:hover .articulo-card__img img {
-      transform: scale(1.05);
-    }
-    .articulo-card__body {
-      padding: 1.5rem;
-    }
-    .articulo-card__meta {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      margin-bottom: .75rem;
-      flex-wrap: wrap;
-    }
-    .articulo-card__categoria {
-      font-family: 'DM Mono', monospace;
-      font-size: .6rem;
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      background: var(--red);
-      color: #fff;
-      padding: .2rem .75rem;
-      border-radius: 9999px;
-      font-weight: 500;
-    }
-    .articulo-card__categoria--verde {
-      background: var(--green);
-    }
-    .articulo-card__fecha {
-      font-family: 'DM Mono', monospace;
-      font-size: .65rem;
-      color: var(--muted);
-    }
-    .articulo-card__titulo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.3;
-      margin-bottom: .5rem;
-    }
-    .articulo-card__excerpt {
-      font-size: .85rem;
-      line-height: 1.6;
-      color: var(--muted);
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .articulo-card__autor {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      margin-top: .75rem;
-      font-size: .8rem;
-      font-weight: 600;
-      color: var(--green);
-    }
-    
-    /* ── Load More Button ── */
-    .load-more-wrapper {
-      text-align: center;
-      margin: 2.5rem 0 1rem;
-    }
-    .btn-load-more {
-      background: var(--red);
-      color: #fff;
       border: none;
-      border-radius: 30px;
-      padding: 12px 40px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.3px;
-      transition: background 0.2s, opacity 0.2s;
-      cursor: pointer;
-      font-family: 'Nunito Sans', sans-serif;
-    }
-    .btn-load-more:hover:not(:disabled) {
-      background: #a01515;
-    }
-    .btn-load-more:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
 
-    /* ── Newsletter ── */
-    .newsletter {
-      background: var(--green);
-      border-radius: .375rem;
-      padding: 1.5rem;
-      color: #fff;
-    }
-    .newsletter h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      margin-bottom: .5rem;
-    }
-    .newsletter p { font-size: .82rem; color: rgba(255,255,255,.75); margin-bottom: 1rem; }
-    .newsletter__form { display: flex; gap: .5rem; }
-    .newsletter__input {
-      flex: 1;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.2);
-      color: #fff;
-      font-size: .85rem;
-      padding: .5rem .75rem;
-      border-radius: .25rem;
-      outline: none;
-      font-family: 'Nunito Sans', sans-serif;
-      transition: border-color .2s;
-    }
-    .newsletter__input::placeholder { color: rgba(255,255,255,.45); }
-    .newsletter__input:focus { border-color: rgba(255,255,255,.7); }
-    .newsletter__btn {
+    /* ── Contacto Rápido ── */
+    .contacto-rapido {
       background: var(--red);
+      padding: 3rem 1.5rem;
+      text-align: center;
       color: #fff;
-      font-size: .75rem;
-      font-weight: 700;
-      padding: .5rem 1rem;
-      border-radius: .25rem;
-      transition: opacity .2s;
     }
-    .newsletter__btn:hover { opacity: .88; }
-
-    /* ── Contact Banner ── */
-    .contact-banner { background: var(--red); padding: 3rem 1.5rem; }
-    .contact-banner__inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+    .contacto-rapido h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
     }
-    .contact-banner__label {
-      font-family: 'DM Mono', monospace;
-      font-size: .65rem;
-      text-transform: uppercase;
-      letter-spacing: .2em;
-      color: rgba(255,255,255,.65);
-      margin-bottom: .75rem;
+    .contacto-rapido p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.8);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
     }
-    .contact-banner__items { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-    .contact-banner__item {
-      display: flex;
+    .contacto-rapido .btn-contacto {
+      display: inline-flex;
       align-items: center;
       gap: .5rem;
-      color: #fff;
-      font-size: .85rem;
+      background: #fff;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: .875rem 2rem;
+      border-radius: .25rem;
+      transition: all .2s;
+      border: none;
     }
-    .contact-banner__item svg { opacity: .65; }
-    .contact-banner__hours { color: rgba(255,255,255,.75); font-size: .85rem; }
+    .contacto-rapido .btn-contacto:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
 
     /* ── Footer ── */
     .footer { background: var(--dark); color: #A0A0A0; padding: 3.5rem 1.5rem; }
@@ -535,18 +516,19 @@
         border-radius: .25rem;
         font-weight: 700;
       }
-      .blog__grid { grid-template-columns: 1fr; }
       .footer__grid { grid-template-columns: 1fr; }
+      .article-content__body { padding: 1.5rem; }
+      .alert-hero { min-height: 60vh; }
+      .alert-hero__title { font-size: clamp(2rem, 6vw, 2.8rem); }
     }
 
     @media (max-width: 480px) {
-      .blog { padding: 4rem 1.5rem; }
-      .blog__grid { gap: 1.5rem; }
-      .search-card { padding: 15px; margin: 10px auto 30px; }
-      .search-box input { flex: 1 1 100%; }
-      .search-box button { width: 100%; }
-      .articulo-card__body { padding: 1rem; }
-      .articulo-card__titulo { font-size: 1rem; }
+      .article-content__body { padding: 1.2rem; }
+      .article-content__body p { font-size: .95rem; }
+      .highlight-box { padding: 1rem 1.2rem; }
+      .alert-hero { min-height: 50vh; padding: 5rem 0 2rem; }
+      .alert-hero__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+      .contacto-rapido h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -602,60 +584,107 @@
 
 <main style="padding-top:4rem;">
 
-<!-- ══════════════ BLOG ══════════════ -->
-<section class="blog">
-  <div class="container">
-    <div class="blog__header">
-      <div>
-        <div class="section-label"><span>Blog & Novedades</span></div>
-        <h2 class="section-title">
-          Consejos, novedades<br>y noticias del campo.
-        </h2>
+<!-- ══════════════ ALERTA HERO ══════════════ -->
+<section class="alert-hero">
+  <div class="alert-hero__bg">
+    <img src="https://agroveterinaria.up.railway.app/images/DiarreaExplosivaH.jpg" alt="Alerta Sanitaria: Diarrea Explosiva en Ganado" />
+  </div>
+  <div class="alert-hero__stripe"></div>
+  <div class="alert-hero__content">
+    <div class="container">
+      <div class="alert-hero__badge">🚨 Alerta Sanitaria</div>
+      <h1 class="alert-hero__title">
+        Diarrea <span class="highlight">Explosiva</span><br>
+        ¡Una amenaza real para tu ganado!
+      </h1>
+      <p class="alert-hero__subtitle">
+        Las lluvias, el lodo y los alimentos sintéticos están activando una crisis sanitaria. 
+        Conoce los síntomas y actúa a tiempo.
+      </p>
+      <div class="alert-hero__actions">
+        <a href="#solucion" class="btn-alert btn-alert-primary">
+          <span>🔴</span> Solución Inmediata
+        </a>
+        <a href="/blog" class="btn-alert btn-alert-secondary">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+          Más Artículos
+        </a>
       </div>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="search-card">
-      <div class="search-box">
-        <input type="text" id="busqueda-blog" placeholder="Buscar artículos..." />
-        <button id="btn-buscar">BUSCAR</button>
-      </div>
-    </div>
-
-    <!-- Grid de artículos -->
-    <div id="grid-articulos" class="blog__grid">
-      <!-- Carga inicial desde el servidor -->
-      <th:block th:replace="blog/blog-principal :: lista-articulos"></th:block>
-    </div>
-
-    <!-- Botón de carga -->
-    <div class="load-more-wrapper">
-      <button id="load-more-btn" class="btn-load-more" data-page="1">
-        Ver más artículos
-      </button>
     </div>
   </div>
 </section>
 
-<!-- Contact Banner -->
-<div class="contact-banner">
-  <div class="container contact-banner__inner">
-    <div>
-      <p class="contact-banner__label">Encuéntranos</p>
-      <div class="contact-banner__items">
-        <span class="contact-banner__item">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-          (52-1) 22 9253 5057
-        </span>
-        <span class="contact-banner__item">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          2 de Abril No. 12-3, C.P. 95870 Centro de Catemaco, Ver.
-        </span>
+<!-- ══════════════ CONTENIDO ══════════════ -->
+<section class="article-content">
+  <div class="container">
+    <div class="article-content__inner">
+      <div class="article-content__body">
+
+        <span class="emoji-big">⚠️</span>
+        <p>
+          <strong>La diarrea explosiva</strong> se llama así porque es <strong>a presión termodinámica</strong>, 
+          una eyección violenta, líquida y lodosa que sale disparada con tal fuerza que se impregna 
+          como <strong>cemento orgánico</strong> en las paredes del corral y en las patas del animal infectado. 
+          Una pintura de fluidos calientes que atrae instantáneamente a un <strong>enjambre de moscas mutantes</strong> 
+          dispuestas a colonizar el desastre.
+        </p>
+
+        <div class="highlight-box highlight-box--red">
+          <span class="icon">⚡</span>
+          <strong>Las lluvias y el lodo</strong> activan bacterias y parásitos malditos como la 
+          <strong>Coccidia</strong> o <strong>Salmonella</strong> que favorecen el contagio animal, 
+          que al paso de las horas, generan un <strong>colapso intestinal en vida</strong>, 
+          provocando una <strong>deshidratación de golpe</strong> y fallo en su sistema renal o flora intestinal, 
+          eso provoca que el animal se aísle, deje de comer y <strong>finalmente fallezca</strong>.
+        </div>
+
+        <!-- ── Video Embed ── -->
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/ds1UEHS81iw" 
+            title="Diarrea Explosiva en Ganado - Alerta Sanitaria"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="highlight-box" style="background: #E8F5E9; border-left-color: var(--green);">
+          <span class="icon">🤠</span>
+          <strong>En Agro Veterinaria La Herradura</strong>, tenemos una 
+          <strong style="color: var(--green);">solución inmediata y efectiva</strong> 
+          para salvar a tus animales. <strong>¡Contáctanos!</strong>
+        </div>
+
+        <div class="highlight-box highlight-box--red" style="background: #FFF3E0; border-left-color: var(--orange);">
+          <span class="icon">⚠️</span>
+          <strong>Nadie te va a decir</strong> que La Diarrea Explosiva, es resultado directo de 
+          los <strong style="color: var(--orange);">nuevos super alimentos sintéticos experimentales</strong> 
+          para acelerar el crecimiento y lograr una producción masiva.
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--muted); text-align: center; margin-top: 2rem;">
+          <em>Artículo informativo · Agroveterinaria La Herradura · Catemaco, Veracruz</em>
+        </p>
       </div>
     </div>
-    <span class="contact-banner__hours">Lun–Dom: 8:00 – 19:00</span>
   </div>
-</div>
+</section>
+
+<!-- ══════════════ CONTACTO RÁPIDO ══════════════ -->
+<section class="contacto-rapido" id="solucion">
+  <div class="container">
+    <h2>🔴 ¡Actúa Ahora!</h2>
+    <p>
+      No esperes a que el problema se agrave. En <strong>Agroveterinaria La Herradura</strong> 
+      tenemos el tratamiento adecuado para salvar a tu ganado.
+    </p>
+    <a href="tel:522292535057" class="btn-contacto">
+      <svg class="icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      Llámanos Ahora: (52-1) 22 9253 5057
+    </a>
+  </div>
+</section>
 
 </main>
 
@@ -713,50 +742,6 @@
     document.getElementById('icon-menu').style.display  = open ? 'none'  : '';
     document.getElementById('icon-close').style.display = open ? ''      : 'none';
   }
-</script>
-
-<!-- Script de carga dinámica de artículos -->
-<script>
-  let busquedaActiva = ""; 
-
-  function solicitarArticulos(esNuevaBusqueda = false) {
-    const btn = document.getElementById('load-more-btn');
-    const contenedor = document.getElementById('grid-articulos');
-    
-    if (esNuevaBusqueda) {
-      busquedaActiva = document.getElementById('busqueda-blog').value.trim();
-      btn.setAttribute('data-page', '0');
-      contenedor.innerHTML = "";
-    }
-
-    const pagina = btn.getAttribute('data-page');
-    const url = `/blog/api/articulos?page=${pagina}&q=${encodeURIComponent(busquedaActiva)}`;
-
-    fetch(url)
-      .then(res => res.text())
-      .then(html => {
-        if (html.trim() === "") {
-          if (esNuevaBusqueda) contenedor.innerHTML = "<p style='text-align:center;color:#666;padding:2rem;grid-column:1/-1;'>No se encontraron coincidencias.</p>";
-          btn.innerHTML = "No hay más artículos";
-          btn.disabled = true;
-        } else {
-          contenedor.insertAdjacentHTML('beforeend', html);
-          btn.setAttribute('data-page', parseInt(pagina) + 1);
-          btn.innerHTML = "Ver más artículos";
-          btn.disabled = false;
-        }
-      })
-      .catch(err => console.error("Error en la petición:", err));
-  }
-
-  document.getElementById('busqueda-blog').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      document.getElementById('btn-buscar').click();
-    }
-  });
-  
-  document.getElementById('btn-buscar').addEventListener('click', () => solicitarArticulos(true));
-  document.getElementById('load-more-btn').addEventListener('click', () => solicitarArticulos(false));
 </script>
 
 </body>

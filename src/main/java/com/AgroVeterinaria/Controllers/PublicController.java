@@ -31,7 +31,19 @@ public class PublicController {
         model.addAttribute("usuario", new Usuarios());
         return "inicio";
     }
-      
+    
+    /**
+     * ✅ NUEVO MÉTODO PARA /quienes
+     * @param model
+     * @return Quienes Somos
+     * 
+     * Este método existe si no se encuentra dado de alta en la BD como Producto
+     */
+    @GetMapping("/quienes")
+    public String quienes(Model model) {
+        return "/productos/quienes";
+    }
+    
     @GetMapping("/api/stats/inicio")
     @ResponseBody
     public ResumenVisitas getStatsInicio() {
