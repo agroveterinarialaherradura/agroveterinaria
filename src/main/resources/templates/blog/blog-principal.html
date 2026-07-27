@@ -1,12 +1,11 @@
+<!-- ===== FRAGMENTO: lista-articulos (AgroVeterinaria Style) ===== -->
 <!-- En blog/blog-principal.html -->
 <th:block th:fragment="lista-articulos">
     <div th:each="art : ${articulos}" class="col-md-4">
-        <!-- Ahora apunta directamente a /urlOrigen -->
         <a class="cardBlog" th:href="@{'/' + ${art.urlBuscar}}" target="_self">
-        	<!-- SELLO DE CONTENIDO HUMANO -->
-            <!-- MEDALLÓN PREMIUN: 100% HUMAN -->
+            <!-- SELLO PREMIUM: 100% HUMAN -->
             <div class="seal-premium">
-                <div class="seal-teeth"></div> <!-- Bordes dentados -->
+                <div class="seal-teeth"></div>
                 <div class="seal-gold-border">
                     <div class="seal-inner-red">
                         <span class="seal-top-text">ORIGINAL</span>
@@ -24,8 +23,8 @@
             
             <div class="cardInfo">
                 <p><b th:text="${art.pregunta}">¿Pregunta?</b></p>
-                <p style="color:yellow;" th:text="${art.comentario}">Comentario resaltado</p>
-                <p style="color:grey;" th:text="${art.respuesta}">Lee.</p>
+                <p style="color: #3A8B35;" th:text="${art.comentario}">Comentario resaltado</p>
+                <p style="color: #6B6B6B;" th:text="${art.respuesta}">Lee.</p>
             </div>
         </a>
     </div>
