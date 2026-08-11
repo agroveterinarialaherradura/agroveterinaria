@@ -227,7 +227,7 @@
   .hero__bg::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(to top, #1A3A1A 30%, rgba(30, 80, 30, 0.55) 8%, transparent);
+    background: transparent;/* linear-gradient(to top, #1A3A1A 30%, rgba(30, 80, 30, 0.55) 8%, transparent); */
   }
   .hero__logo {
     position: absolute;
@@ -966,7 +966,7 @@
           </span>
         </div>
       </div>
-      <span class="contact-banner__hours">Lun–Dom: 8:00 – 19:00</span>
+      <span class="contact-banner__hours">Lun–Sáb: 9:00 – 18:00 · Dom: 9:00 – 16:00</span>
     </div>
   </div>
 
@@ -990,11 +990,10 @@
       </div>
       <div>
         <h5 class="footer__heading">Horarios</h5>
-        <ul class="footer__hours">
-          <li><span>Lunes – Viernes</span><span>8:00 – 19:00</span></li>
-          <li><span>Sábados</span><span>8:00 – 13:00</span></li>
-          <li><span>Domingos</span><span>Cerrado</span></li>
-        </ul>
+		<ul class="footer__hours">
+		  <li><span>Lunes – Sábado</span><span>9:00 – 18:00</span></li>
+		  <li><span>Domingos</span><span>9:00 – 16:00</span></li>
+		</ul>
       </div>
       <div>
         <h5 class="footer__heading">Contacto</h5>
