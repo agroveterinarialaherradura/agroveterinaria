@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+		<title>Lista::Crud</title>
+	</head>
+	<body>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3>Lista de Usuarios</h3>
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Username</th>
+					<th>Mail</th>
+					<th>Contraseña</th>
+					<th>Estatus</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="${objeto}">
+						<td data-th-text="${objeto.username}"></td>
+						<td data-th-text="${objeto.email}"></td>
+						<td data-th-text="${objeto.contraseña}"></td>
+						<td data-th-text="${objeto.estatus}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</body>
+</html>

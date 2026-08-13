@@ -1,0 +1,751 @@
+<!-- Página Principal: AgroVeterinaria
+    Created on : 10/11/2018, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 7680 6898
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+-->
+<!-- Página Principal: AgroVeterinaria
+    Created on : 10/11/2018, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 7680 6898
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="icon" th:href="@{/images/redondo.jpg}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <meta name="description" content="Panel de visitas y estadísticas de Agroveterinaria La Herradura. Consulta las métricas de tu blog y secciones.">
+  <meta name="author" content="Agroveterinaria La Herradura">
+  <meta name="robots" content="noindex, follow">
+  <meta name="language" content="Spanish">
+  <meta name="geo.region" content="MX-VER">
+  <meta name="geo.placename" content="Centro de Catemaco, Veracruz">
+  
+  <title>Panel de Visitas | Agroveterinaria La Herradura</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { 
+      background: #F9F6F1; 
+      color: #1A1A1A; 
+      font-family: 'Nunito Sans', sans-serif; 
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; }
+
+    /* ── Tokens ── */
+    :root {
+      --red:   #C41E1E;
+      --green: #3A8B35;
+      --dark:  #1A1A1A;
+      --muted: #6B6B6B;
+      --bg:    #F9F6F1;
+      --card:  #FFFFFF;
+      --alt:   #F0EBE3;
+    }
+
+    /* ── Utilities ── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid rgba(0,0,0,.1);
+      box-shadow: 0 1px 8px rgba(0,0,0,.07);
+    }
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      height: 4rem;
+      width: 100%;
+    }
+    .navbar__brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .navbar__logo {
+      height: 2.75rem;
+      width: 2.75rem;
+      object-fit: contain;
+      border-radius: .25rem;
+    }
+    .navbar__name { line-height: 1.2; }
+    .navbar__name-main {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: .02em;
+    }
+    .navbar__name-sub {
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--muted);
+    }
+
+    .navbar__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .navbar__link {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--dark);
+      transition: color .2s;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+    .navbar__link:hover,
+    .navbar__link.active {
+      color: var(--red);
+      font-weight: 700;
+      border-bottom-color: var(--red);
+    }
+    .navbar__cta {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--red);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      transition: opacity .2s;
+    }
+    .navbar__cta:hover { opacity: .88; }
+
+    .navbar__actions {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .navbar__emergencia {
+      display: none;
+      align-items: center;
+      gap: .3rem;
+      background: var(--red);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .4rem .75rem;
+      border-radius: .25rem;
+      border: 1px solid var(--red);
+      transition: background .2s, opacity .2s;
+      text-decoration: none;
+    }
+    .navbar__emergencia:hover { background: #a01515; opacity: .9; }
+    .navbar__blog {
+      display: none;
+      align-items: center;
+      gap: .3rem;
+      background: transparent;
+      color: var(--red);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .4rem .75rem;
+      border-radius: .25rem;
+      border: 1px solid var(--red);
+      transition: background .2s, color .2s;
+      cursor: pointer;
+    }
+    .navbar__blog:hover { background: var(--red); color: #fff; }
+    .navbar__burger {
+      display: none;
+      color: var(--red);
+      padding: .25rem;
+    }
+    .navbar__mobile { display: none; }
+
+    /* ── Dashboard ── */
+    .dashboard-container {
+      flex: 1;
+      padding: 7rem 1.5rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .dashboard-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .dashboard-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: .5rem;
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,.08);
+    }
+    .stat-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--red);
+    }
+    
+    .chart-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .chart-card {
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: .5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    }
+    .chart-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--red);
+      padding-left: 0.8rem;
+    }
+    
+    .selector-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .selector-group label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--dark);
+    }
+    .selector-group select {
+      background: var(--bg);
+      color: var(--dark);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      border: 2px solid #E0E0E0;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: border-color 0.25s;
+      outline: none;
+      min-width: 150px;
+    }
+    .selector-group select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(196,30,30,0.15);
+    }
+    
+    .device-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--dark);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .device-table th,
+    .device-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .device-table th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: var(--bg);
+      font-weight: 700;
+    }
+    .device-table tr:hover td {
+      background: rgba(196,30,30,0.03);
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-desktop { background: #3b82f6; }
+    .badge-movil { background: var(--green); }
+    .badge-tablet { background: #f59e0b; }
+    .badge-otros { background: #6b7280; }
+    
+    .loading, .error {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+    .error {
+      color: var(--red);
+      background: rgba(196,30,30,0.06);
+      border-radius: .5rem;
+    }
+
+    /* ── Footer ── */
+    .footer { background: var(--dark); color: #A0A0A0; padding: 3.5rem 1.5rem; margin-top: auto; }
+    .footer__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+    .footer__brand { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+    .footer__brand img {
+      height: 3.5rem;
+      width: 3.5rem;
+      object-fit: contain;
+      border-radius: .25rem;
+      background: #fff;
+      padding: .15rem;
+    }
+    .footer__brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .footer__brand-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--red);
+    }
+    .footer p { font-size: .85rem; line-height: 1.7; }
+    .footer__heading {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .footer__hours { list-style: none; }
+    .footer__hours li {
+      display: flex;
+      justify-content: space-between;
+      font-size: .85rem;
+      padding: .4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .footer__hours li span:last-child { color: #fff; }
+    .footer__contact { list-style: none; }
+    .footer__contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      font-size: .85rem;
+      padding: .45rem 0;
+    }
+    .footer__contact svg { flex-shrink: 0; margin-top: .1rem; color: var(--red); }
+    .footer__bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer__bottom span {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+    }
+    .footer__bottom span:last-child { color: #444; }
+
+    .icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .navbar__link { font-size: .8rem; }
+      .navbar__cta { font-size: .7rem; padding: .4rem .8rem; }
+    }
+
+    @media (min-width: 769px) {
+      .navbar__inner { justify-content: flex-end; }
+      .navbar__brand { margin-right: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar__inner { justify-content: space-between; }
+      .navbar__links { display: none; }
+      .navbar__burger { display: block; }
+      .navbar__blog { display: inline-flex; }
+      .navbar__emergencia { display: inline-flex; }
+      .navbar__mobile.open {
+        display: block;
+        padding: 1rem 1.5rem 1.5rem;
+        border-top: 1px solid rgba(0,0,0,.08);
+      }
+      .navbar__mobile a {
+        display: block;
+        padding: .75rem 0;
+        border-bottom: 1px solid rgba(0,0,0,.05);
+        color: var(--dark);
+        font-size: .9rem;
+      }
+      .navbar__mobile .navbar__cta-mobile {
+        display: flex;
+        justify-content: center;
+        margin-top: .75rem;
+        padding: .75rem;
+        background: var(--red);
+        color: #fff;
+        border-radius: .25rem;
+        font-weight: 700;
+      }
+      .chart-row { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .dashboard-container { padding: 6rem 1rem 3rem; }
+      .dashboard-title { font-size: 2rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-container { padding: 5rem 0.8rem 2rem; }
+      .dashboard-title { font-size: 1.6rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-value { font-size: 1.8rem; }
+      .chart-card { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="/" class="navbar__brand">
+      <img class="navbar__logo" th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+      <div class="navbar__name">
+        <div class="navbar__name-main">La Herradura</div>
+        <div class="navbar__name-sub">Agroveterinaria</div>
+      </div>
+    </a>
+
+    <div class="navbar__links">
+      <a class="navbar__link" href="/">Inicio</a>
+      <a class="navbar__link" href="/quienes">Quiénes Somos</a>
+      <a class="navbar__link" href="/blog">Blog</a>
+      <a class="navbar__link active" href="/visitas">Dashboard</a>
+      <a class="navbar__cta" href="tel:522292535057">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (52-1) 22 9253 5057
+      </a>
+    </div>
+
+    <div class="navbar__actions">
+      <a class="navbar__emergencia" href="tel:522292535057">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </a>
+      <a class="navbar__blog" href="/blog">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+        Blog
+      </a>
+      <button class="navbar__burger" onclick="toggleMenu()" aria-label="Menú">
+        <svg id="icon-menu" class="icon" style="width:1.4rem;height:1.4rem" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="icon-close" class="icon" style="width:1.4rem;height:1.4rem;display:none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  
+  <div class="navbar__mobile" id="mobile-menu">
+    <div class="container">
+      <a href="/">Inicio</a>
+      <a href="/quienes">Quiénes Somos</a>
+      <a href="/blog">Blog</a>
+      <a href="/visitas">Dashboard</a>
+      <a class="navbar__cta-mobile" href="tel:522292535057">Llamar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════ DASHBOARD ══════════════ -->
+<div class="dashboard-container">
+  <h1 class="dashboard-title">📊 Panel de Visitas</h1>
+  <p class="dashboard-subtitle">Estadísticas de las secciones del Blog</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-title">Total de Visitas</div>
+      <div class="stat-value" th:text="${statsGlobal != null ? statsGlobal.escritorio + statsGlobal.movil + statsGlobal.tablet + statsGlobal.otros : 0}">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Escritorio</div>
+      <div class="stat-value" th:text="${statsGlobal != null ? statsGlobal.escritorio : 0}">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Móvil</div>
+      <div class="stat-value" th:text="${statsGlobal != null ? statsGlobal.movil : 0}">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">Tablet</div>
+      <div class="stat-value" th:text="${statsGlobal != null ? statsGlobal.tablet : 0}">0</div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <!-- Gráfico de barras: visitas por sección -->
+    <div class="chart-card">
+      <div class="chart-title">📊 Visitas por sección</div>
+      <canvas id="sectionsChartCanvas" width="400" height="300"></canvas>
+    </div>
+
+    <!-- Gráfico de dona + selector -->
+    <div class="chart-card">
+      <div class="chart-title">📱 Distribución por dispositivo</div>
+      <div class="selector-group">
+        <label>Sección:</label>
+        <select id="deviceSectionSelect">
+          <option th:each="sec : ${seccionesSelector}"
+                  th:value="${sec['id']}"
+                  th:text="${sec['nombre']}"
+                  th:selected="${sec['id'] == 'AgroVeterinaria'}">
+          </option>
+        </select>
+      </div>
+      <canvas id="deviceChartCanvas" width="400" height="300"></canvas>
+      <div id="deviceTableContainer" style="margin-top: 1rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+          <div>
+            <div class="footer__brand-name">Agroveterinaria La Herradura</div>
+            <div class="footer__brand-sub">Catemaco, Veracruz</div>
+          </div>
+        </div>
+        <p>Tu aliado en el campo. Salud animal, insumos agropecuarios y asesoramiento técnico para la región de Los Tuxtlas, Veracruz.</p>
+      </div>
+      <div>
+        <h5 class="footer__heading">Horarios</h5>
+        <ul class="footer__hours">
+          <li><span>Lunes – Viernes</span><span>8:00 – 19:00</span></li>
+          <li><span>Sábados</span><span>8:00 – 13:00</span></li>
+          <li><span>Domingos</span><span>Cerrado</span></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="footer__heading">Contacto</h5>
+        <ul class="footer__contact">
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (52-1) 22 9253 5057
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            agroveterinarialaherradura.mx@gmail.com
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            2 de Abril No. 12-3, C.P. 95870 Centro de Catemaco, Ver.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Agroveterinaria La Herradura. Todos los derechos reservados.</span>
+      <span>SAGARPA Registrada · Catemaco, Ver.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const open = menu.classList.toggle('open');
+    document.getElementById('icon-menu').style.display  = open ? 'none'  : '';
+    document.getElementById('icon-close').style.display = open ? ''      : 'none';
+  }
+</script>
+
+<script th:inline="javascript">
+  // Datos del backend
+  const seccionesStats = /*[[${seccionesStats}]]*/ [];
+  const seccionesSelector = /*[[${seccionesSelector}]]*/ [];
+</script>
+
+<script>
+  let deviceChart = null;
+  let sectionsChart = null;
+
+  // Renderizar gráfico de barras usando seccionesSelector como fuente
+  function renderSectionsBarChart() {
+    if (!seccionesSelector || seccionesSelector.length === 0) {
+      console.warn("No hay secciones definidas en el selector");
+      return;
+    }
+
+    const visitasMap = new Map();
+    if (seccionesStats && seccionesStats.length) {
+      seccionesStats.forEach(stat => {
+        const origen = stat.origen || stat.nombre;
+        visitasMap.set(origen, stat.visitas || 0);
+      });
+    }
+
+    const labels = seccionesSelector.map(sec => sec.nombre);
+    const visitas = seccionesSelector.map(sec => visitasMap.get(sec.id) || 0);
+
+    const ctx = document.getElementById('sectionsChartCanvas').getContext('2d');
+    if (sectionsChart) sectionsChart.destroy();
+    sectionsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Visitas',
+          data: visitas,
+          backgroundColor: '#C41E1E',
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            beginAtZero: true, 
+            grid: { color: 'rgba(0,0,0,0.06)' }, 
+            ticks: { color: '#6B6B6B' } 
+          },
+          x: { 
+            ticks: { color: '#6B6B6B', rotation: 45, maxRotation: 45, autoSkip: true } 
+          }
+        }
+      }
+    });
+  }
+
+  // Obtener datos de dispositivos desde la API
+  async function fetchDeviceStats(origen) {
+    const url = `/admin/origen/${encodeURIComponent(origen)}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      console.error(`Error al obtener ${origen}:`, error);
+      return { escritorio: 0, movil: 0, tablet: 0, otros: 0, global: 0 };
+    }
+  }
+
+  // Actualizar gráfico de dona y tabla para la sección seleccionada
+  async function updateDeviceStats(originId) {
+    const stats = await fetchDeviceStats(originId);
+    const ctx = document.getElementById('deviceChartCanvas').getContext('2d');
+    if (deviceChart) deviceChart.destroy();
+    deviceChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Escritorio', 'Móvil', 'Tablet', 'Otros'],
+        datasets: [{
+          data: [stats.escritorio, stats.movil, stats.tablet, stats.otros],
+          backgroundColor: ['#3b82f6', '#3A8B35', '#f59e0b', '#6b7280'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { 
+          legend: { 
+            position: 'bottom', 
+            labels: { color: '#1A1A1A' } 
+          } 
+        }
+      }
+    });
+
+    const total = stats.global || 1;
+    const percent = (val) => ((val / total) * 100).toFixed(1);
+    const tableHtml = `
+      <table class="device-table">
+        <thead><tr><th>Dispositivo</th><th>Visitas</th><th>Porcentaje</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-desktop">Escritorio</span></td><td>${stats.escritorio}</td><td>${percent(stats.escritorio)}%</td></tr>
+          <tr><td><span class="badge badge-movil">Móvil</span></td><td>${stats.movil}</td><td>${percent(stats.movil)}%</td></tr>
+          <tr><td><span class="badge badge-tablet">Tablet</span></td><td>${stats.tablet}</td><td>${percent(stats.tablet)}%</td></tr>
+          <tr><td><span class="badge badge-otros">Otros</span></td><td>${stats.otros}</td><td>${percent(stats.otros)}%</td></tr>
+        </tbody>
+      </table>
+    `;
+    document.getElementById('deviceTableContainer').innerHTML = tableHtml;
+  }
+
+  // Inicialización
+  document.addEventListener('DOMContentLoaded', () => {
+    renderSectionsBarChart();
+    const selector = document.getElementById('deviceSectionSelect');
+    if (selector && selector.options.length > 0) {
+      const defaultOrigin = selector.value;
+      updateDeviceStats(defaultOrigin);
+      selector.addEventListener('change', (e) => {
+        updateDeviceStats(e.target.value);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

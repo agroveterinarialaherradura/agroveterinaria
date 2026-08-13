@@ -1,0 +1,530 @@
+<!-- Página Principal: AgroVeterinaria
+    Created on : 10/11/2018, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 4883 7137
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="icon" th:href="@{/images/redondo.jpg}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <meta name="description" content="Política de Cookies de Agroveterinaria La Herradura. Conoce cómo utilizamos las cookies en nuestro sitio web.">
+  <meta name="author" content="Agroveterinaria La Herradura">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Spanish">
+  <meta name="geo.region" content="MX-VER">
+  <meta name="geo.placename" content="Centro de Catemaco, Veracruz">
+  
+  <title>Política de Cookies | Agroveterinaria La Herradura</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { 
+      background: #F9F6F1; 
+      color: #1A1A1A; 
+      font-family: 'Nunito Sans', sans-serif; 
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: var(--red); }
+    a:hover { text-decoration: underline; }
+    button { cursor: pointer; border: none; background: none; }
+
+    /* ── Tokens ── */
+    :root {
+      --red:   #C41E1E;
+      --green: #3A8B35;
+      --dark:  #1A1A1A;
+      --muted: #6B6B6B;
+      --bg:    #F9F6F1;
+      --card:  #FFFFFF;
+      --alt:   #F0EBE3;
+    }
+
+    /* ── Utilities ── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: #fff; border-bottom: 1px solid rgba(0,0,0,.1);
+      box-shadow: 0 1px 8px rgba(0,0,0,.07);
+    }
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      height: 4rem;
+      width: 100%;
+    }
+    .navbar__brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .navbar__logo {
+      height: 2.75rem;
+      width: 2.75rem;
+      object-fit: contain;
+      border-radius: .25rem;
+    }
+    .navbar__name { line-height: 1.2; }
+    .navbar__name-main {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: .02em;
+    }
+    .navbar__name-sub {
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--muted);
+    }
+
+    .navbar__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .navbar__link {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--dark);
+      transition: color .2s;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+    .navbar__link:hover,
+    .navbar__link.active {
+      color: var(--red);
+      font-weight: 700;
+      border-bottom-color: var(--red);
+    }
+    .navbar__cta {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--red);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      transition: opacity .2s;
+    }
+    .navbar__cta:hover { opacity: .88; }
+
+    .navbar__actions {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .navbar__emergencia {
+      display: none;
+      align-items: center;
+      gap: .3rem;
+      background: var(--red);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .4rem .75rem;
+      border-radius: .25rem;
+      border: 1px solid var(--red);
+      transition: background .2s, opacity .2s;
+      text-decoration: none;
+    }
+    .navbar__emergencia:hover { background: #a01515; opacity: .9; }
+    .navbar__blog {
+      display: none;
+      align-items: center;
+      gap: .3rem;
+      background: transparent;
+      color: var(--red);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      padding: .4rem .75rem;
+      border-radius: .25rem;
+      border: 1px solid var(--red);
+      transition: background .2s, color .2s;
+      cursor: pointer;
+    }
+    .navbar__blog:hover { background: var(--red); color: #fff; }
+    .navbar__burger {
+      display: none;
+      color: var(--red);
+      padding: .25rem;
+    }
+    .navbar__mobile { display: none; }
+
+    /* ── Cookies ── */
+    .cookies-section {
+      flex: 1;
+      padding: 7rem 1.5rem 4rem;
+    }
+    .cookies-section .body {
+      background: var(--card);
+      border-radius: .5rem;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.06);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .cookies-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .cookies-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .cookies-section p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .cookies-section ul, 
+    .cookies-section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .cookies-section li {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .cookies-section li p {
+      margin-bottom: 0.25rem;
+    }
+    .cookies-section a {
+      color: var(--red);
+      text-decoration: none;
+    }
+    .cookies-section a:hover {
+      text-decoration: underline;
+    }
+    .cookies-section strong {
+      color: var(--dark);
+    }
+
+    /* ── Footer ── */
+    .footer { background: var(--dark); color: #A0A0A0; padding: 3.5rem 1.5rem; margin-top: auto; }
+    .footer__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+    .footer__brand { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+    .footer__brand img {
+      height: 3.5rem;
+      width: 3.5rem;
+      object-fit: contain;
+      border-radius: .25rem;
+      background: #fff;
+      padding: .15rem;
+    }
+    .footer__brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .footer__brand-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--red);
+    }
+    .footer p { font-size: .85rem; line-height: 1.7; }
+    .footer__heading {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .footer__hours { list-style: none; }
+    .footer__hours li {
+      display: flex;
+      justify-content: space-between;
+      font-size: .85rem;
+      padding: .4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .footer__hours li span:last-child { color: #fff; }
+    .footer__contact { list-style: none; }
+    .footer__contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      font-size: .85rem;
+      padding: .45rem 0;
+    }
+    .footer__contact svg { flex-shrink: 0; margin-top: .1rem; color: var(--red); }
+    .footer__bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer__bottom span {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+    }
+    .footer__bottom span:last-child { color: #444; }
+
+    .icon { display: inline-block; width: 1em; height: 1em; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .navbar__link { font-size: .8rem; }
+      .navbar__cta { font-size: .7rem; padding: .4rem .8rem; }
+    }
+
+    @media (min-width: 769px) {
+      .navbar__inner { justify-content: flex-end; }
+      .navbar__brand { margin-right: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar__inner { justify-content: space-between; }
+      .navbar__links { display: none; }
+      .navbar__burger { display: block; }
+      .navbar__blog { display: inline-flex; }
+      .navbar__emergencia { display: inline-flex; }
+      .navbar__mobile.open {
+        display: block;
+        padding: 1rem 1.5rem 1.5rem;
+        border-top: 1px solid rgba(0,0,0,.08);
+      }
+      .navbar__mobile a {
+        display: block;
+        padding: .75rem 0;
+        border-bottom: 1px solid rgba(0,0,0,.05);
+        color: var(--dark);
+        font-size: .9rem;
+      }
+      .navbar__mobile .navbar__cta-mobile {
+        display: flex;
+        justify-content: center;
+        margin-top: .75rem;
+        padding: .75rem;
+        background: var(--red);
+        color: #fff;
+        border-radius: .25rem;
+        font-weight: 700;
+      }
+      .footer__grid { grid-template-columns: 1fr; }
+      .cookies-section { padding: 6rem 1rem 3rem; }
+      .cookies-section .body { padding: 1.5rem; }
+      .cookies-section h1 { font-size: 1.8rem; }
+      .cookies-section h2 { font-size: 1.1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .cookies-section { padding: 5rem 0.8rem 2rem; }
+      .cookies-section .body { padding: 1.2rem; }
+      .cookies-section h1 { font-size: 1.5rem; }
+      .cookies-section h2 { font-size: 1rem; }
+      .cookies-section p,
+      .cookies-section li { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="/" class="navbar__brand">
+      <img class="navbar__logo" th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+      <div class="navbar__name">
+        <div class="navbar__name-main">La Herradura</div>
+        <div class="navbar__name-sub">Agroveterinaria</div>
+      </div>
+    </a>
+
+    <div class="navbar__links">
+      <a class="navbar__link" href="/">Inicio</a>
+      <a class="navbar__link" href="/quienes">Quiénes Somos</a>
+      <a class="navbar__link active" href="/blog">Blog</a>
+      <a class="navbar__cta" href="tel:522292535057">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (52-1) 22 9253 5057
+      </a>
+    </div>
+
+    <div class="navbar__actions">
+      <a class="navbar__emergencia" href="tel:522292535057">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </a>
+      <a class="navbar__blog" href="/blog">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+        Blog
+      </a>
+      <button class="navbar__burger" onclick="toggleMenu()" aria-label="Menú">
+        <svg id="icon-menu" class="icon" style="width:1.4rem;height:1.4rem" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="icon-close" class="icon" style="width:1.4rem;height:1.4rem;display:none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  
+  <div class="navbar__mobile" id="mobile-menu">
+    <div class="container">
+      <a href="/">Inicio</a>
+      <a href="/quienes">Quiénes Somos</a>
+      <a href="/blog">Blog</a>
+      <a class="navbar__cta-mobile" href="tel:522292535057">Llamar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════ POLÍTICA DE COOKIES ══════════════ -->
+<section class="cookies-section">
+  <div class="body">
+    <h1>Política de Cookies</h1>
+    
+    <p>Nuestra Política de Cookies tiene por finalidad informarle de forma clara y completa sobre el funcionamiento y la finalidad de las cookies que utilizamos en la página web <a href="https://agroveterinaria.up.railway.app/">https://agroveterinaria.up.railway.app/</a> (en adelante, la Plataforma). En caso de que quieras recabar más información sobre las cookies, puede enviar un correo electrónico a <a href="mailto:agroveterinarialaherradura.mx@gmail.com">agroveterinarialaherradura.mx@gmail.com</a>.</p>
+    
+    <h2>Cookies</h2>
+    <p>Una cookie es un archivo que se descarga en tu equipo terminal/dispositivo (ordenador o equipo móvil) con la finalidad de almacenar datos que podrán ser actualizados y recuperados por la entidad responsable de su instalación. Agroveterinaria La Herradura cuando utiliza "cookies" es con la finalidad de poder recabar información acerca de su funcionamiento y uso de los usuarios.</p>
+    
+    <p>Nosotros no almacenamos información sensible de identificación personal como tu dirección, contraseña, los datos de tu tarjeta de crédito o débito, etc. en las cookies que utilizamos.</p>
+    
+    <h2>Finalidad</h2>
+    <p>Las cookies pueden recabar información sobre tus visitas a nuestra Plataforma, la frecuencia y duración de estas, las páginas visionadas y el tiempo que has estado en nuestra Plataforma. Te informo de que podemos utilizar cookies con la finalidad de:</p>
+    
+    <ul>
+      <li><p>Identificar posibles mejoras para nuestra Plataforma</p></li>
+      <li><p>Facilitar a tu navegador en nuestra Plataforma</p></li>
+      <li><p>Ofrecerte una mejor experiencia en su uso</p></li>
+      <li><p>Distinguirte de otros usuarios</p></li>
+    </ul>
+    
+    <p>Asimismo, cuando se vayan a utilizar cookies te solicitamos tu consentimiento para utilizar cookies que nos permitan obtener más información acerca de tus preferencias y personalizar nuestra Plataforma para ajustarla a sus intereses.</p>
+    
+    <h2>Clases de cookies</h2>
+    <p>Nuestra Plataforma utiliza cookies propias y de terceros con diferentes finalidades, concretamente:</p>
+    
+    <p><strong>Cookies propias</strong></p>
+    <p>Son enviadas a tu ordenador y gestionadas exclusivamente por nosotros para el mejor funcionamiento de la Plataforma. Estas cookies permanecen en tu navegador y nos permiten identificarte como usuario recurrente de la Plataforma, controlar la sesión de usuario, recuerdan la configuración de las cookies, reconocerte como usuario en caso de realizar trámites de identificación y personalizar tu contenido para ofrecerte contenidos adecuados a tus preferencias (cookies de personalización).</p>
+    
+    <p><strong>Cookies de terceros</strong></p>
+    <p>Las cookies de terceros son aquellas establecidas por un dominio diferente de nuestra Plataforma. En nuestra Plataforma utilizamos dos tipos de cookies de terceros:</p>
+    
+    <ul>
+      <li>
+        <p><strong>Cookies Técnicas:</strong> Te permiten navegar a través de la Plataforma y utilizar los servicios en ella disponibles como, por ejemplo, controlar la comunicación de datos, realizar una compra, almacenar contenidos, personalizar el idioma y la moneda, los tests de comprobación de formato, compartir contenidos a través de redes sociales de acuerdo a tus intereses como usuario, acelerar la carga de la página, etc., tales como Facebook.</p>
+      </li>
+      <li>
+        <p><strong>Cookies Analíticas:</strong> Utilizamos Google Analytics, una herramienta de análisis web de Google que nos permite informarnos sobre cómo interactúan los usuarios de nuestra Plataforma. Asimismo, habilita cookies para saber desde qué página ha accedido el usuario y las utiliza para recopilar información de forma anónima y elaborar informes de tendencias de la Plataforma sin identificar a usuarios individuales. Puedes consultar más información sobre las cookies de Google Analytics y su funcionamiento en el sitio web de: <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es">developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage</a></p>
+      </li>
+    </ul>
+    
+    <h2>Consentimiento</h2>
+    <p>Al navegar y continuar en nuestra Plataforma, estarás consintiendo el uso de las cookies antes enunciadas en las condiciones contenidas en la presente Política de Cookies.</p>
+    
+    <p>Te informamos de que dado que las cookies no son necesarias para el uso de nuestra Plataforma, puedes bloquearlas o deshabilitarlas a través de la configuración de tu navegador. Si las bloqueas o deshabilitas podrás seguir usando nuestra Plataforma, aunque el uso de algunos de los productos o servicios podrá ser limitado y por tanto tu experiencia en Agroveterinaria La Herradura será menos satisfactoria.</p>
+    
+    <p>Si deseas revocar tu consentimiento informado respecto a nuestra política de cookies, deberás eliminarlas en tu dispositivo a través de la configuración de tus navegadores de internet. Estos son los enlaces de los distintos navegadores que informan sobre las cookies:</p>
+    
+    <p>Firefox: <a target="_blank" href="https://www.mozilla.org/es-ES/privacy/websites/">https://www.mozilla.org/es-ES/privacy/websites/</a></p>
+    
+    <p>Chrome: <a target="_blank" href="http://support.google.com/chrome/bin/answer.py?hl=es&amp;answer=95647">http://support.google.com/chrome/bin/answer.py?hl=es&amp;answer=95647</a></p>
+    
+    <p>Explorer: <a target="_blank" href="http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9">http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9</a></p>
+    
+    <p>Safari: <a target="_blank" href="http://support.apple.com/kb/ph5042">http://support.apple.com/kb/ph5042</a></p>
+    
+    <p>Opera: <a target="_blank" href="http://help.opera.com/Windows/11.50/es-ES/cookies.html">http://help.opera.com/Windows/11.50/es-ES/cookies.html</a></p>
+    
+    <p>Te recomiendo revisar la política cada vez que accedas a Agroveterinaria La Herradura con el objetivo de estar adecuadamente informado sobre posibles cambios.</p>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+          <div>
+            <div class="footer__brand-name">Agroveterinaria La Herradura</div>
+            <div class="footer__brand-sub">Catemaco, Veracruz</div>
+          </div>
+        </div>
+        <p>Tu aliado en el campo. Salud animal, insumos agropecuarios y asesoramiento técnico para la región de Los Tuxtlas, Veracruz.</p>
+      </div>
+      <div>
+        <h5 class="footer__heading">Horarios</h5>
+        <ul class="footer__hours">
+          <li><span>Lunes – Viernes</span><span>8:00 – 19:00</span></li>
+          <li><span>Sábados</span><span>8:00 – 13:00</span></li>
+          <li><span>Domingos</span><span>Cerrado</span></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="footer__heading">Contacto</h5>
+        <ul class="footer__contact">
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (52-1) 22 9253 5057
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            agroveterinarialaherradura.mx@gmail.com
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            2 de Abril No. 12-3, C.P. 95870 Centro de Catemaco, Ver.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Agroveterinaria La Herradura. Todos los derechos reservados.</span>
+      <span>SAGARPA Registrada · Catemaco, Ver.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const open = menu.classList.toggle('open');
+    document.getElementById('icon-menu').style.display  = open ? 'none'  : '';
+    document.getElementById('icon-close').style.display = open ? ''      : 'none';
+  }
+</script>
+
+</body>
+</html>
