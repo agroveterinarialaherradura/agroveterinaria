@@ -1,3 +1,6 @@
+Aquí tienes el archivo `DiarreaExplosiva.html` completo con el **contador de visitas** y la **sección de comentarios** integrados:
+
+```html
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -21,7 +24,6 @@
   <meta property="og:site_name" content="AgroVeterinaria">
   <meta property="og:locale" content="es_MX">
   <meta property="og:image" content="https://agroveterinaria.up.railway.app/images/DiarreaExplosivaH.jpg">
-  
   
   <title>🚨 Alerta Sanitaria: Diarrea Explosiva | Agroveterinaria La Herradura</title>
   
@@ -375,6 +377,129 @@
       border: none;
     }
 
+    /* ── Sección de Comentarios (estilo AgroVeterinaria) ── */
+    .comments-section {
+      background: var(--bg);
+      padding: 2rem 1.5rem 4rem;
+    }
+    .comments-section .comments-card {
+      background: var(--card);
+      border-radius: .5rem;
+      padding: 2.5rem 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.06);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .comments-section .comments-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .comments-section .comments-card .subtitle {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .comments-section .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .comments-section .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+    .comments-section .form-control {
+      width: 100%;
+      background: var(--bg);
+      border: 2px solid #E0E0E0;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-family: 'Nunito Sans', sans-serif;
+      transition: border-color 0.25s;
+      color: var(--dark);
+    }
+    .comments-section .form-control:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(196,30,30,0.15);
+    }
+    .comments-section .form-control::placeholder {
+      color: #B0B0B0;
+    }
+    .comments-section .btn-comment {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 2rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+      cursor: pointer;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .comments-section .btn-comment:hover {
+      opacity: 0.85;
+    }
+    .comments-section .alert {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .comments-section .alert-success {
+      background: #E8F5E9;
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+    .comments-section .alert-danger {
+      background: #FFEBEE;
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+    .comments-section .comment-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 1.5rem;
+    }
+    .comments-section .comment-item {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid var(--red);
+    }
+    .comments-section .comment-item .comment-email {
+      font-weight: 700;
+      color: var(--red);
+      font-size: 0.85rem;
+    }
+    .comments-section .comment-item .comment-text {
+      color: var(--dark);
+      margin: 0.3rem 0;
+    }
+    .comments-section .comment-item .comment-date {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .comments-section .no-comments {
+      text-align: center;
+      color: var(--muted);
+      padding: 1.5rem 0;
+    }
+    .comments-section .footnote {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
     /* ── Contacto Rápido ── */
     .contacto-rapido {
       background: var(--red);
@@ -521,6 +646,7 @@
       }
       .footer__grid { grid-template-columns: 1fr; }
       .article-content__body { padding: 1.5rem; }
+      .comments-section .comments-card { padding: 1.5rem; }
       .alert-hero { min-height: 60vh; }
       .alert-hero__title { font-size: clamp(2rem, 6vw, 2.8rem); }
     }
@@ -529,9 +655,11 @@
       .article-content__body { padding: 1.2rem; }
       .article-content__body p { font-size: .95rem; }
       .highlight-box { padding: 1rem 1.2rem; }
+      .comments-section .comments-card { padding: 1.2rem; }
       .alert-hero { min-height: 50vh; padding: 5rem 0 2rem; }
       .alert-hero__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
       .contacto-rapido h2 { font-size: 1.6rem; }
+      .contacto-rapido .btn-contacto { width: 100%; justify-content: center; }
     }
   </style>
 
@@ -591,7 +719,7 @@
 <!-- ══════════════ ALERTA HERO ══════════════ -->
 <section class="alert-hero">
   <div class="alert-hero__bg">
-    <img src="https://agroveterinaria.up.railway.app/images/DiarreaExplosivaH.jpg" alt="Alerta Sanitaria: Diarrea Explosiva en Ganado" />
+    <img src="/images/DiarreaExplosivaH.jpg" alt="Alerta Sanitaria: Diarrea Explosiva en Ganado" />
   </div>
   <div class="alert-hero__stripe"></div>
   <div class="alert-hero__content">
@@ -675,6 +803,49 @@
   </div>
 </section>
 
+<!-- ══════════════ SECCIÓN DE COMENTARIOS ══════════════ -->
+<section class="comments-section" id="comentarios">
+  <div class="container">
+    <div class="comments-card">
+      <h2>💬 Comentarios y experiencias</h2>
+      <p class="subtitle">¿Has enfrentado casos de diarrea explosiva en tu ganado? Cuéntanos tu experiencia.</p>
+
+      <!-- Mensajes flash -->
+      <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
+      <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+      <!-- Formulario de comentarios -->
+      <form method="post" th:action="@{/registroBlog}" th:object="${blog}" id="blogForm">
+        <input type="hidden" th:field="*{origen}" />
+        
+        <div class="form-group">
+          <label class="form-label" for="email">Correo electrónico</label>
+          <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="tu@correo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="comentario">Tu comentario o experiencia</label>
+          <input type="text" th:field="*{comentario}" id="comentario" class="form-control" placeholder="¿Has visto casos de diarrea explosiva en tu región? Cuéntanos..." required>
+        </div>
+
+        <button type="submit" class="btn-comment">💬 Publicar comentario</button>
+      </form>
+
+      <!-- Lista de comentarios -->
+      <ul class="comment-list" th:if="${not #lists.isEmpty(blogs)}">
+        <li class="comment-item" th:each="com : ${blogs}">
+          <div class="comment-email" th:text="${com.email}">email@ejemplo.com</div>
+          <div class="comment-text" th:text="${com.comentario}">Texto del comentario</div>
+          <div class="comment-date" th:text="${com.fecha}">fecha</div>
+        </li>
+      </ul>
+      <p class="no-comments" th:if="${#lists.isEmpty(blogs)}">Sé el primero en compartir tu testimonio o experiencia.</p>
+      
+      <div class="footnote">*Los comentarios son públicos, no compartas información personal sensible.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════ CONTACTO RÁPIDO ══════════════ -->
 <section class="contacto-rapido" id="solucion">
   <div class="container">
@@ -746,6 +917,44 @@
     document.getElementById('icon-menu').style.display  = open ? 'none'  : '';
     document.getElementById('icon-close').style.display = open ? ''      : 'none';
   }
+</script>
+
+<!-- Script para actualizar el contador de visitas -->
+<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $.get('/api/stats/blog', function(data) {
+        if (data && data.escritorio !== undefined) {
+            var total = data.escritorio + data.movil + data.tablet + (data.otros || 0);
+            // Actualizar contador en el footer
+            if ($('#visitantes-footer').length) {
+                $('#visitantes-footer').text(total);
+            }
+        }
+    }).fail(function() {
+        if ($('#visitantes-footer').length) {
+            $('#visitantes-footer').text('No disponible');
+        }
+    });
+});
+</script>
+
+<!-- Script para mostrar contador de visitas en el footer -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si existe el span para el contador
+    var visitantesSpan = document.getElementById('visitantes-footer');
+    if (!visitantesSpan) {
+        // Si no existe, crearlo en el footer
+        var footerBottom = document.querySelector('.footer__bottom');
+        if (footerBottom) {
+            var contadorHTML = '<div style="margin-top:1rem;font-size:0.7rem;color:#888;">';
+            contadorHTML += '<strong>Eres el Visitante No:</strong> <span id="visitantes-footer">Cargando...</span>';
+            contadorHTML += '</div>';
+            footerBottom.insertAdjacentHTML('afterend', contadorHTML);
+        }
+    }
+});
 </script>
 
 </body>

@@ -1,3 +1,6 @@
+Aquí tienes el archivo `MoscaEsteril.html` completo con el video de YouTube Shorts incrustado en la sección de contenido:
+
+```html
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -20,13 +23,9 @@
 
   <title>⚠️ NO MATES a las MOSCAS Estériles | AgroVeterinaria</title>
 
-  <!-- SE CONSERVAN ESTILOS EXACTOS DEL ORIGINAL -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Nunito+Sans&family=DM+Mono&display=swap" rel="stylesheet" />
-
-  <!-- IMPORTANTE: aquí debes pegar TODO el <style> original SIN CAMBIOS -->
-  <!-- (se omite aquí por brevedad, pero en tu implementación cópialo completo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ── Reset & Base ── */
@@ -374,6 +373,129 @@
       border: none;
     }
 
+    /* ── Sección de Comentarios (estilo AgroVeterinaria) ── */
+    .comments-section {
+      background: var(--bg);
+      padding: 2rem 1.5rem 4rem;
+    }
+    .comments-section .comments-card {
+      background: var(--card);
+      border-radius: .5rem;
+      padding: 2.5rem 2.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.06);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .comments-section .comments-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .comments-section .comments-card .subtitle {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .comments-section .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .comments-section .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+    .comments-section .form-control {
+      width: 100%;
+      background: var(--bg);
+      border: 2px solid #E0E0E0;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-family: 'Nunito Sans', sans-serif;
+      transition: border-color 0.25s;
+      color: var(--dark);
+    }
+    .comments-section .form-control:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(196,30,30,0.15);
+    }
+    .comments-section .form-control::placeholder {
+      color: #B0B0B0;
+    }
+    .comments-section .btn-comment {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 2rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+      cursor: pointer;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .comments-section .btn-comment:hover {
+      opacity: 0.85;
+    }
+    .comments-section .alert {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .comments-section .alert-success {
+      background: #E8F5E9;
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+    .comments-section .alert-danger {
+      background: #FFEBEE;
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+    .comments-section .comment-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 1.5rem;
+    }
+    .comments-section .comment-item {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid var(--red);
+    }
+    .comments-section .comment-item .comment-email {
+      font-weight: 700;
+      color: var(--red);
+      font-size: 0.85rem;
+    }
+    .comments-section .comment-item .comment-text {
+      color: var(--dark);
+      margin: 0.3rem 0;
+    }
+    .comments-section .comment-item .comment-date {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .comments-section .no-comments {
+      text-align: center;
+      color: var(--muted);
+      padding: 1.5rem 0;
+    }
+    .comments-section .footnote {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
     /* ── Contacto Rápido ── */
     .contacto-rapido {
       background: var(--red);
@@ -520,6 +642,7 @@
       }
       .footer__grid { grid-template-columns: 1fr; }
       .article-content__body { padding: 1.5rem; }
+      .comments-section .comments-card { padding: 1.5rem; }
       .alert-hero { min-height: 60vh; }
       .alert-hero__title { font-size: clamp(2rem, 6vw, 2.8rem); }
     }
@@ -528,9 +651,11 @@
       .article-content__body { padding: 1.2rem; }
       .article-content__body p { font-size: .95rem; }
       .highlight-box { padding: 1rem 1.2rem; }
+      .comments-section .comments-card { padding: 1.2rem; }
       .alert-hero { min-height: 50vh; padding: 5rem 0 2rem; }
       .alert-hero__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
       .contacto-rapido h2 { font-size: 1.6rem; }
+      .contacto-rapido .btn-contacto { width: 100%; justify-content: center; }
     }
   </style>
 
@@ -538,96 +663,296 @@
 
 <body>
 
-<!-- NAVBAR (SE CONSERVA IGUAL) -->
-<header class="navbar">
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar" id="navbar">
   <div class="container navbar__inner">
-    <div class="navbar__brand">
-      <img th:src="@{/images/redondo.jpg}" class="navbar__logo"/>
+    <a href="/" class="navbar__brand">
+      <img class="navbar__logo" th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
       <div class="navbar__name">
-        <div class="navbar__name-main">Agroveterinaria</div>
-        <div class="navbar__name-sub">La Herradura</div>
+        <div class="navbar__name-main">La Herradura</div>
+        <div class="navbar__name-sub">Agroveterinaria</div>
       </div>
+    </a>
+
+    <div class="navbar__links">
+      <a class="navbar__link" href="/">Inicio</a>
+      <a class="navbar__link" href="/quienes">Quiénes Somos</a>
+      <a class="navbar__link active" href="/blog">Blog</a>
+      <a class="navbar__cta" href="tel:522292535057">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (52-1) 22 9253 5057
+      </a>
+    </div>
+
+    <div class="navbar__actions">
+      <a class="navbar__emergencia" href="tel:522292535057">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </a>
+      <a class="navbar__blog" href="/blog">
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+        Blog
+      </a>
+      <button class="navbar__burger" onclick="toggleMenu()" aria-label="Menú">
+        <svg id="icon-menu" class="icon" style="width:1.4rem;height:1.4rem" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="icon-close" class="icon" style="width:1.4rem;height:1.4rem;display:none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
   </div>
-</header>
+  
+  <div class="navbar__mobile" id="mobile-menu">
+    <div class="container">
+      <a href="/">Inicio</a>
+      <a href="/quienes">Quiénes Somos</a>
+      <a href="/blog">Blog</a>
+      <a class="navbar__cta-mobile" href="tel:522292535057">Llamar</a>
+    </div>
+  </div>
+</nav>
 
-<!-- HERO -->
+<main style="padding-top:4rem;">
+
+<!-- ══════════════ HERO ══════════════ -->
 <section class="alert-hero">
   <div class="alert-hero__bg">
     <img src="/images/MoscaEsterilH.jpg" alt="Mosca estéril">
   </div>
-
-  <div class="alert-hero__content container">
-    <div class="alert-hero__badge">ALERTA SANITARIA</div>
-
-    <h1 class="alert-hero__title">
-      🪰 NO MATES a las <span class="highlight">MOSCAS</span>
-    </h1>
-
-    <p class="alert-hero__subtitle">
-      Las moscas estériles son una estrategia científica para eliminar el Gusano Barrenador.
-      Matar estas moscas puede afectar el control biológico y aumentar el riesgo en tu ganado.
-    </p>
-  </div>
-</section>
-
-<!-- CONTENIDO -->
-<section class="article-content">
-  <div class="article-content__inner">
-    <div class="article-content__body">
-
-      <span class="emoji-big">🧬</span>
-
-      <p>
-        Esta estrategia es impulsada por autoridades gubernamentales de sanidad agraria como el 
-        Gobierno de México y laboratorios aliados en América.
+  <div class="alert-hero__stripe"></div>
+  <div class="alert-hero__content">
+    <div class="container">
+      <div class="alert-hero__badge">🚨 Alerta Sanitaria</div>
+      <h1 class="alert-hero__title">
+        🪰 NO MATES a las <span class="highlight">MOSCAS</span> Estériles
+      </h1>
+      <p class="alert-hero__subtitle">
+        Las moscas estériles son una estrategia científica para eliminar el Gusano Barrenador.
+        Matar estas moscas puede afectar el control biológico y aumentar el riesgo en tu ganado.
       </p>
-
-      <p>
-        Fue desarrollada científicamente a mediados del siglo XX mediante la Técnica del Insecto Estéril.
-      </p>
-
-      <div class="highlight-box highlight-box--red">
-        <strong>🚫 NO MATES a las MOSCAS</strong>
+      <div class="alert-hero__actions">
+        <a href="#comentarios" class="btn-alert btn-alert-primary">
+          <span>💬</span> Deja tu Comentario
+        </a>
+        <a href="/blog" class="btn-alert btn-alert-secondary">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+          Más Artículos
+        </a>
       </div>
-
-      <p>
-        Las moscas estériles son producidas en laboratorios de bioseguridad en conjunto con México,
-        Estados Unidos y Centroamérica, especialmente en la Planta Moscamed.
-      </p>
-
-      <p>
-        Estas moscas pertenecen a la especie <strong>Cochliomyia hominivorax</strong> y son tratadas con
-        radiación ionizante (rayos gamma o rayos X), además de un colorante verde para identificarlas.
-      </p>
-
-      <div class="highlight-box">
-        <strong>🎯 OBJETIVO:</strong> Control biológico y erradicación del Gusano Barrenador
-      </div>
-
-      <p>
-        Cuando estas moscas se reproducen con hembras silvestres, los huevos no eclosionan,
-        evitando el nacimiento de larvas.
-      </p>
-
-      <p>
-        Esto rompe el ciclo de vida del parásito que puede devorar tejido vivo de ganado,
-        animales e incluso humanos.
-      </p>
-
-      <div class="highlight-box highlight-box--red">
-        <strong>⚠️ IMPORTANTE:</strong> Si las matas, reduces la efectividad del programa sanitario
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- CONTACTO -->
-<section class="contacto-rapido">
-  <h2>¿Tienes ganado en riesgo?</h2>
-  <p>Contáctanos inmediatamente para orientación y protección sanitaria</p>
+<!-- ══════════════ CONTENIDO ══════════════ -->
+<section class="article-content">
+  <div class="container">
+    <div class="article-content__inner">
+      <div class="article-content__body">
+
+        <span class="emoji-big">🧬</span>
+
+        <p>
+          Esta estrategia es impulsada por autoridades gubernamentales de sanidad agraria como el 
+          Gobierno de México y laboratorios aliados en América.
+        </p>
+
+        <p>
+          Fue desarrollada científicamente a mediados del siglo XX mediante la Técnica del Insecto Estéril.
+        </p>
+
+        <!-- ═══ VIDEO EMBED (YouTube Shorts) ═══ -->
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/yFH6n5ecx9Y" 
+            title="NO MATES las Moscas #agricultura #diarreaexplosiva #caballos #agro #prevención #vaca #ganadería"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="highlight-box highlight-box--red">
+          <strong>🚫 NO MATES a las MOSCAS Estériles</strong>
+        </div>
+
+        <p>
+          Las moscas estériles son producidas en laboratorios de bioseguridad en conjunto con México,
+          Estados Unidos y Centroamérica, especialmente en la Planta Moscamed.
+        </p>
+
+        <p>
+          Estas moscas pertenecen a la especie <strong>Cochliomyia hominivorax</strong> y son tratadas con
+          radiación ionizante (rayos gamma o rayos X), además de un colorante verde para identificarlas.
+        </p>
+
+        <div class="highlight-box">
+          <strong>🎯 OBJETIVO:</strong> Control biológico y erradicación del Gusano Barrenador
+        </div>
+
+        <p>
+          Cuando estas moscas se reproducen con hembras silvestres, los huevos no eclosionan,
+          evitando el nacimiento de larvas.
+        </p>
+
+        <p>
+          Esto rompe el ciclo de vida del parásito que puede devorar tejido vivo de ganado,
+          animales e incluso humanos.
+        </p>
+
+        <div class="highlight-box highlight-box--red">
+          <strong>⚠️ IMPORTANTE:</strong> Si las matas, reduces la efectividad del programa sanitario
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ══════════════ SECCIÓN DE COMENTARIOS ══════════════ -->
+<section class="comments-section" id="comentarios">
+  <div class="container">
+    <div class="comments-card">
+      <h2>💬 Comentarios y experiencias</h2>
+      <p class="subtitle">¿Has visto moscas estériles en tu rancho? Cuéntanos tu experiencia.</p>
+
+      <!-- Mensajes flash -->
+      <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
+      <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+      <!-- Formulario de comentarios -->
+      <form method="post" th:action="@{/registroBlog}" th:object="${blog}" id="blogForm">
+        <input type="hidden" th:field="*{origen}" />
+        
+        <div class="form-group">
+          <label class="form-label" for="email">Correo electrónico</label>
+          <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="tu@correo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="comentario">Tu comentario o experiencia</label>
+          <input type="text" th:field="*{comentario}" id="comentario" class="form-control" placeholder="¿Has visto moscas estériles en tu región? Cuéntanos..." required>
+        </div>
+
+        <button type="submit" class="btn-comment">💬 Publicar comentario</button>
+      </form>
+
+      <!-- Lista de comentarios -->
+      <ul class="comment-list" th:if="${not #lists.isEmpty(blogs)}">
+        <li class="comment-item" th:each="com : ${blogs}">
+          <div class="comment-email" th:text="${com.email}">email@ejemplo.com</div>
+          <div class="comment-text" th:text="${com.comentario}">Texto del comentario</div>
+          <div class="comment-date" th:text="${com.fecha}">fecha</div>
+        </li>
+      </ul>
+      <p class="no-comments" th:if="${#lists.isEmpty(blogs)}">Sé el primero en compartir tu testimonio o experiencia.</p>
+      
+      <div class="footnote">*Los comentarios son públicos, no compartas información personal sensible.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACTO RÁPIDO ══════════════ -->
+<section class="contacto-rapido">
+  <div class="container">
+    <h2>🐄 ¿Tienes ganado en riesgo?</h2>
+    <p>Contáctanos inmediatamente para orientación y protección sanitaria</p>
+    <a href="tel:522292535057" class="btn-contacto">
+      <svg class="icon" viewBox="0 0 24 24" width="20" height="20"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      Llámanos Ahora: (52-1) 22 9253 5057
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img th:src="@{/images/Logotipo.jpg}" alt="Logo La Herradura" />
+          <div>
+            <div class="footer__brand-name">Agroveterinaria La Herradura</div>
+            <div class="footer__brand-sub">Catemaco, Veracruz</div>
+          </div>
+        </div>
+        <p>Tu aliado en el campo. Salud animal, insumos agropecuarios y asesoramiento técnico para la región de Los Tuxtlas, Veracruz.</p>
+      </div>
+      <div>
+        <h5 class="footer__heading">Horarios</h5>
+        <ul class="footer__hours">
+          <li><span>Lunes – Sábado</span><span>9:00 – 18:00</span></li>
+          <li><span>Domingos</span><span>9:00 – 16:00</span></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="footer__heading">Contacto</h5>
+        <ul class="footer__contact">
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            (52-1) 22 9253 5057
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            agroveterinaria.mx@gmail.com
+          </li>
+          <li>
+            <svg class="icon" style="width:1rem;height:1rem" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            2 de Abril No. 12-3, C.P. 95870 Centro de Catemaco, Ver.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Agroveterinaria La Herradura. Todos los derechos reservados.</span>
+      <span>SAGARPA Registrada · Catemaco, Ver.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const open = menu.classList.toggle('open');
+    document.getElementById('icon-menu').style.display  = open ? 'none'  : '';
+    document.getElementById('icon-close').style.display = open ? ''      : 'none';
+  }
+</script>
+
+<!-- Script para actualizar el contador de visitas -->
+<script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $.get('/api/stats/blog', function(data) {
+        if (data && data.escritorio !== undefined) {
+            var total = data.escritorio + data.movil + data.tablet + (data.otros || 0);
+            if ($('#visitantes-footer').length) {
+                $('#visitantes-footer').text(total);
+            }
+        }
+    }).fail(function() {
+        if ($('#visitantes-footer').length) {
+            $('#visitantes-footer').text('No disponible');
+        }
+    });
+});
+</script>
+
+<!-- Script para mostrar contador de visitas en el footer -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var visitantesSpan = document.getElementById('visitantes-footer');
+    if (!visitantesSpan) {
+        var footerBottom = document.querySelector('.footer__bottom');
+        if (footerBottom) {
+            var contadorHTML = '<div style="margin-top:1rem;font-size:0.7rem;color:#888;">';
+            contadorHTML += '<strong>Eres el Visitante No:</strong> <span id="visitantes-footer">Cargando...</span>';
+            contadorHTML += '</div>';
+            footerBottom.insertAdjacentHTML('afterend', contadorHTML);
+        }
+    }
+});
+</script>
 
 </body>
 </html>
