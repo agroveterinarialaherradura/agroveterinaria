@@ -139,4 +139,34 @@ public class BlogExternasService {
             return new ArrayList<>();
         }
     }
+
+    
+    /**
+     * Valida un comentario llamando al API de Heroku.
+     */
+    public Map<String, String> validarComentario(String origen, String clave, String fecha, String hora) {
+        try {
+            String url = herokuApiUrl + "/blog/validar/" + origen + "/" + clave + "/" + fecha + "/" + hora;
+            System.out.println("🌐 Validando comentario en Heroku: " + url);
+            
+            ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+            
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                Map<String, String> result = new HashMap<>();
+                result.put("mensaje", (String) response.getBody().get("mensaje"));
+                System.out.println(" 0000157-validarComentario result: " + response.getBody().get("mensaje"));
+                return result;
+            } else {
+                Map<String, String> error = new HashMap<>();
+                error.put("error", "Error al validar el comentario");
+                return error;
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error al validar comentario: " + e.getMessage());
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Error al validar el comentario: " + e.getMessage());
+            return error;
+        }
+    }
 }

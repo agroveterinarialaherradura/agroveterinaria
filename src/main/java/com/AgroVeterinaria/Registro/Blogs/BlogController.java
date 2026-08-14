@@ -127,4 +127,37 @@ public class BlogController {
         session.removeAttribute("idsAleatorios");
         return "redirect:/blog";
     }
+    
+    
+    /**
+     * Endpoint para validar un comentario desde el link del correo.
+     * Este método recibe la solicitud del usuario y llama al API de Heroku.
+     */
+    @GetMapping("/validaBlog/{origen}/{clave}/{fecha}/{hora}")
+    public String validarComentario(@PathVariable String origen,
+                                    @PathVariable String clave,
+                                    @PathVariable String fecha,
+                                    @PathVariable String hora,
+                                    Model model) {
+        System.out.println("📧 Validando comentario desde RailWay: " + origen);
+        
+        try {
+            // Llamar al API de Heroku para validar
+            Map<String, String> response = blogExternasService.validarComentario(origen, clave, fecha, hora);
+            
+            if (response.containsKey("error")) {
+                model.addAttribute("error", response.get("error"));
+                return "blog/validacion_error";
+            }
+            
+            model.addAttribute("mensaje", response.get("mensaje"));
+            return "blog/comentario_validado";
+            
+        } catch (Exception e) {
+            System.err.println("Error al validar comentario: " + e.getMessage());
+            model.addAttribute("error", "Error al validar el comentario: " + e.getMessage());
+            return "blog/validacion_error";
+        }
+    }
+    
 }
