@@ -1,6 +1,8 @@
-Aquí tienes el archivo `DiarreaExplosiva.html` completo con el **contador de visitas** y la **sección de comentarios** integrados:
-
-```html
+<!-- Página Principal AgroVeterinaria
+    Created on : 17/08/2026, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 38153640
+--- Diarrea Explosiva - Artículo -->
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -816,7 +818,7 @@ Aquí tienes el archivo `DiarreaExplosiva.html` completo con el **contador de vi
 
       <!-- Formulario de comentarios -->
       <form method="post" th:action="@{/registroBlog}" th:object="${blog}" id="blogForm">
-        <input type="hidden" th:field="*{origen}" />
+        <input type="hidden" th:field="*{origen}" value="Diarrea Explosiva ALERTA SANITARIA" />
         
         <div class="form-group">
           <label class="form-label" for="email">Correo electrónico</label>
@@ -923,18 +925,30 @@ Aquí tienes el archivo `DiarreaExplosiva.html` completo con el **contador de vi
 <script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-    $.get('/api/stats/blog', function(data) {
-        if (data && data.escritorio !== undefined) {
+    var origen = 'Diarrea Explosiva ALERTA SANITARIA';
+    
+    $.get('/api/stats/filtradas?origen=' + encodeURIComponent(origen), function(data) {
+        if (data && data.global !== undefined) {
+            if ($('#visitantes-footer').length) {
+                $('#visitantes-footer').text(data.global);
+            }
+            console.log('Visitantes (' + origen + '):', data.global);
+        } else if (data && data.escritorio !== undefined) {
             var total = data.escritorio + data.movil + data.tablet + (data.otros || 0);
-            // Actualizar contador en el footer
             if ($('#visitantes-footer').length) {
                 $('#visitantes-footer').text(total);
+            }
+            console.log('Visitantes (' + origen + '):', total);
+        } else {
+            if ($('#visitantes-footer').length) {
+                $('#visitantes-footer').text('No disponible');
             }
         }
     }).fail(function() {
         if ($('#visitantes-footer').length) {
             $('#visitantes-footer').text('No disponible');
         }
+        console.log('Error al obtener estadísticas para:', origen);
     });
 });
 </script>
@@ -942,10 +956,8 @@ $(document).ready(function() {
 <!-- Script para mostrar contador de visitas en el footer -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Verificar si existe el span para el contador
     var visitantesSpan = document.getElementById('visitantes-footer');
     if (!visitantesSpan) {
-        // Si no existe, crearlo en el footer
         var footerBottom = document.querySelector('.footer__bottom');
         if (footerBottom) {
             var contadorHTML = '<div style="margin-top:1rem;font-size:0.7rem;color:#888;">';

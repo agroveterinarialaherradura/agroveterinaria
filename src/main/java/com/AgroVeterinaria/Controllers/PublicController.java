@@ -1,13 +1,14 @@
 package com.AgroVeterinaria.Controllers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.AgroVeterinaria.DTO.ResumenVisitas;
 import com.AgroVeterinaria.DTO.Usuarios;
 import com.AgroVeterinaria.Herramientas.Constantes;
 import com.AgroVeterinaria.Registro.Visitas.VisitasExternasService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,19 +30,16 @@ public class PublicController {
         model.addAttribute("mes", hoy.getMonth().getDisplayName(java.time.format.TextStyle.FULL, new Locale("es", "MX")));
         model.addAttribute("anio", hoy.getYear());
         model.addAttribute("usuario", new Usuarios());
+        // ❌ No llamamos a visitasExternasService aquí
+        // ✅ En su lugar, dejamos que el frontend cargue las estadísticas vía AJAX
         return "inicio";
     }
     
-    /**
-     * ✅ NUEVO MÉTODO PARA /quienes
-     * @param model
-     * @return Quienes Somos
-     * 
-     * Este método existe si no se encuentra dado de alta en la BD como Producto
-     */
+    // ✅ Exclusivo AgroVeterinaria: Página "Quiénes Somos"
     @GetMapping("/quienes")
-    public String quienes(Model model) {
-        return "productos/quienes";
+    public String quienes(Model model, HttpServletRequest request) {
+        // Aquí puedes agregar atributos si necesitas pasar datos a la vista
+        return "productos/quienes"; // Busca /templates/quienes.html
     }
     
     @GetMapping("/api/stats/inicio")
@@ -51,7 +49,7 @@ public class PublicController {
             return visitasExternasService.procesarVisitas(Constantes.ORIGEN_MAY);
         } catch (Exception e) {
             System.err.println("Error al obtener stats: " + e.getMessage());
-            return new ResumenVisitas();
+            return new ResumenVisitas(); // Vacío en caso de error
         }
     }
     
@@ -59,10 +57,25 @@ public class PublicController {
     @ResponseBody
     public ResumenVisitas getStatsBlog() {
         try {
+            // Usa el origen que tengas para el blog (por ejemplo "blog")
             return visitasExternasService.procesarVisitas("blog");
         } catch (Exception e) {
             System.err.println("Error al obtener stats del blog: " + e.getMessage());
-            return new ResumenVisitas();
+            return new ResumenVisitas(); // vacío en caso de error
+        }
+    }
+    
+    @GetMapping("/api/stats/filtradas")
+    @ResponseBody
+    public ResumenVisitas getStatsFiltradas(@RequestParam String origen) {
+        try {
+            System.out.println("📊 Obteniendo estadísticas para origen: " + origen);
+            return visitasExternasService.procesarVisitas(origen);
+        } catch (Exception e) {
+            System.err.println("❌ Error al obtener stats filtradas: " + e.getMessage());
+            ResumenVisitas error = new ResumenVisitas();
+            error.setGlobal(0);
+            return error;
         }
     }
     
@@ -82,10 +95,7 @@ public class PublicController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        if (!model.containsAttribute("usuario")) {
-            model.addAttribute("usuario", new Usuarios());
-        }
+    public String login() {
         return "login";
     }
 }

@@ -1,6 +1,8 @@
-Aquí tienes el archivo `MoscaEsteril.html` completo con el video de YouTube Shorts incrustado en la sección de contenido:
-
-```html
+<!-- Página Principal AgroVeterinaria
+    Created on : 17/08/2026, 02:03:20 PM
+    Author     : Fernando R. Betancourt
+    Cell       : 55 38153640
+--- Mosca Esteril - Artículo -->
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -820,7 +822,7 @@ Aquí tienes el archivo `MoscaEsteril.html` completo con el video de YouTube Sho
 
       <!-- Formulario de comentarios -->
       <form method="post" th:action="@{/registroBlog}" th:object="${blog}" id="blogForm">
-        <input type="hidden" th:field="*{origen}" />
+        <input type="hidden" th:field="*{origen}" value="NO MATES a la Mosca" />
         
         <div class="form-group">
           <label class="form-label" for="email">Correo electrónico</label>
@@ -923,17 +925,30 @@ Aquí tienes el archivo `MoscaEsteril.html` completo con el video de YouTube Sho
 <script src="/webjars/jquery/1.9.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-    $.get('/api/stats/blog', function(data) {
-        if (data && data.escritorio !== undefined) {
+    var origen = 'NO MATES a la Mosca';
+    
+    $.get('/api/stats/filtradas?origen=' + encodeURIComponent(origen), function(data) {
+        if (data && data.global !== undefined) {
+            if ($('#visitantes-footer').length) {
+                $('#visitantes-footer').text(data.global);
+            }
+            console.log('Visitantes (' + origen + '):', data.global);
+        } else if (data && data.escritorio !== undefined) {
             var total = data.escritorio + data.movil + data.tablet + (data.otros || 0);
             if ($('#visitantes-footer').length) {
                 $('#visitantes-footer').text(total);
+            }
+            console.log('Visitantes (' + origen + '):', total);
+        } else {
+            if ($('#visitantes-footer').length) {
+                $('#visitantes-footer').text('No disponible');
             }
         }
     }).fail(function() {
         if ($('#visitantes-footer').length) {
             $('#visitantes-footer').text('No disponible');
         }
+        console.log('Error al obtener estadísticas para:', origen);
     });
 });
 </script>

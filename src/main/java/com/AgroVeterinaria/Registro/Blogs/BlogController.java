@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.AgroVeterinaria.DTO.Articulo;
 import com.AgroVeterinaria.DTO.Blog;
 import com.AgroVeterinaria.DTO.ResumenVisitas;
-import com.AgroVeterinaria.Registro.Blogs.BlogExternasService;
 import com.AgroVeterinaria.Registro.Visitas.VisitasExternasService;
 
 @Controller
