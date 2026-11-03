@@ -534,6 +534,64 @@
       box-shadow: 0 8px 24px rgba(0,0,0,.2);
     }
 
+    /* ── Mapa ── */
+    .mapa-section {
+      background: var(--bg);
+      padding: 3rem 1.5rem 4rem;
+    }
+    .mapa-section .mapa-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: .5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .mapa-section .mapa-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .mapa-section .mapa-card p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    .mapa-wrapper {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+      border-radius: .5rem;
+      overflow: hidden;
+      border: 3px solid var(--yellow);
+      box-shadow: 0 8px 32px rgba(196,30,30,0.25);
+    }
+    .mapa-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .mapa-section .mapa-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.25rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--red);
+      transition: opacity .2s;
+    }
+    .mapa-section .mapa-link:hover { opacity: .75; }
+
     /* ── Footer ── */
     .footer { background: var(--dark); color: #A0A0A0; padding: 3.5rem 1.5rem; }
     .footer__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
@@ -658,6 +716,8 @@
       .alert-hero__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
       .contacto-rapido h2 { font-size: 1.6rem; }
       .contacto-rapido .btn-contacto { width: 100%; justify-content: center; }
+      .mapa-section .mapa-card { padding: 1rem; }
+      .mapa-section .mapa-card h2 { font-size: 1.5rem; }
     }
   </style>
 
@@ -718,7 +778,7 @@
 <!-- ══════════════ HERO ══════════════ -->
 <section class="alert-hero">
   <div class="alert-hero__bg">
-    <img src="/images/TozDePerreraH.jpg" alt="Perro con tos de la perrera">
+    <img src="/images/TozDePerrera.jpg" alt="Perro con tos de la perrera">
   </div>
   <div class="alert-hero__stripe"></div>
   <div class="alert-hero__content">
@@ -812,6 +872,35 @@
   </div>
 </section>
 
+<!-- ══════════════ MAPA DE UBICACIÓN ══════════════ -->
+<section class="mapa-section" id="ubicacion">
+  <div class="container">
+    <div class="mapa-card">
+      <h2>📍 Encuéntranos en Catemaco</h2>
+      <p>Visítanos en nuestra sucursal. Estamos listos para atender a tus animales.</p>
+      <div class="mapa-wrapper">
+        <iframe
+          src="https://www.google.com/maps?q=18.418712,-95.112166&hl=es&z=16&output=embed"
+          title="Ubicación de Agroveterinaria La Herradura en Catemaco, Veracruz"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div style="text-align:center;">
+        <a class="mapa-link"
+           href="https://www.google.com/maps/search/?api=1&query=18.418712,-95.112166"
+           target="_blank"
+           rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Abrir en Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ══════════════ SECCIÓN DE COMENTARIOS ══════════════ -->
 <section class="comments-section" id="comentarios">
   <div class="container">
@@ -854,6 +943,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- ══════════════ CONTACTO RÁPIDO ══════════════ -->
 <section class="contacto-rapido">
