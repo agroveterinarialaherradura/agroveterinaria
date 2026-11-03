@@ -72,7 +72,7 @@ public class VisitasService implements VisitasPort {
          // Realizar la petición POST al servicio externo
          restTemplate.postForEntity(externalApiUrl, requestEntity, String.class);
          
-         System.out.println("📤 Visita enviada al servicio externo: " + visita.getOrigen());
+         //System.out.println("📤 Visita enviada al servicio externo: " + visita.getOrigen());
          
      } catch (Exception e) {
          // Solo logueamos el error, pero NO interrumpimos la petición del usuario
